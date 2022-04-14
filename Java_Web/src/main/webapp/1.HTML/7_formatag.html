@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<!-- 주석 -->
+<!--
+ form 양식 : 사용자에게 입력, 선택할 수 있는 서식 
+ 1. <input> : 입력 상자
+ * 속성 : type(입력타입, 형식) 
+ 	1. text : 문자입력
+ 	2. password : 비밀번호 입력
+ 	3. radio : 선택버튼 [ 복수선택 X ]
+ 	4. checkbox : 선택버튼 [ 복수선택 O ] 
+ 	4. button : submit(폼에 입력된 데이터 전송), reset(폼에 입력된 데이터 초기화)
+ 	5. 
+ 2. value : 값 넣기
+ 3. readonly : 읽기 모드(수정 불가능)
+ 4. placeholder : 아이디 입력
+ 5. autofocus : 마우스커서
+ 6. disabled : 사용 금지
+ 7. name : 태그 이름(태그이름이 맞아야 라디오 버튼이 하나로 묶이게 됨)
+ 8. checked = "checked" : 선택 상태
+ 2. <select> : 목록상자
+ 	1. < option > : 목록 추가
+ 3. <textarea> : 텍스트상자
+ 	1. rows : 가로 글자수
+ 	2. cols : 세로 글자수
+-->
+	<form> <!-- 입력 틀(양식) -->
+		이름 : <input type="text" value="호우주의보" readonly="readonly"> <br>
+		아이디 : <input type="text" placeholder="아이디 입력" autofocus="autofocus"> <br>
+		회원등급 : <input type="text" value="일반" disabled="disabled"> <br>
+		비밀번호 : <input type="password" placeholder="비밀번호 입력"> <br>
+		선택버튼(복수선택 X) : <input type="radio" name = "name" checked="checked"> 예 
+						   <input type="radio" name = "name"> 아니오 <br>
+		선택버튼(복수선택 O) : <input type="checkbox" name = "item1" checked="checked"> 힙합
+						   <input type="checkbox" name = "item2"> 클래식
+						   <input type="checkbox" name = "item3"> 발라드 <br>
+		선택상자 : <br><input type="text"> @ 
+			<select>
+			<option> 직접입력 </option>
+			<option> naver.com </option>
+			<option> nate.com </option>	
+		</select> 
+		<br>자기소개 : <textarea rows="3" cols="50"></textarea>	<br>
+		버튼 : <input type = "button" value="button">
+				<input type = "submit" value = "폼 전송 버튼">
+				<input type = "reset" value="reset"> <br>
+		색상 : <input type = "color"> <br>
+		날짜 : <input type = "date"> <br>
+			  <input type = "datetime-local"> <br>
+	    이메일 : <input type = "email"> <br>
+		월단위 : <input type = "month"> <br>
+		시간단위 : <input type = "time"> <br>
+		주단위 : <input type = "week"> <br>
+		숫자범위 : <input type = "number" min="1" max ="10"> <br>
+		범위 : <input type = "range" min = "0" max = "100" step = "10"> <br>	
+		리스트 : <input list = "list">
+					<datalist id="list">
+						<option value = "네이버">
+						<option value = "다음">
+						<option value = "네이트">
+					</datalist>
+	</form>
+	
+	<a href ="../index.html"> 1. 인덱스로가기 </a>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<a href ="../index.html"> 1. 인덱스로가기 </a>
+<!--  
+	1. border : 테두리
+	2. colspan : 열 병합
+1. <tr> table row : 행
+2. <td> table data : (셀) 값
+3. <th> table header : 제목
+
+ -->
+<table border="1" >
+<tr> <!-- 1행 시작 --> 
+<th>지역</th> <th>최저기온</th> <th>최고기온</th>
+</tr> <!-- 1행 끝 -->
+
+<tr> <!-- 2행 시작 -->
+<td>서울</td> <td>17</td> <td>28</td>
+</tr><!-- 2행 끝 -->
+
+<tr> <!-- 3행 시작 -->
+<td>부산</td> <td>10</td> <td>33</td>
+</tr><!-- 3행 끝 -->
+
+<tr> <!-- 4행 시작 -->
+<td>안산</td> <td>20</td> <td>32</td>
+</tr><!-- 4행 끝 -->
+
+</table>
+
+<table border="1" style="border-collapse: collapse;">
+<tr> <th>출발</th> <th>도착</th> <th colspan="2">요금/객실</th> <th>예약</th> </tr>
+<tr>
+	<td rowspan="3">서울</td>
+	<td>부산</td>
+	<td>50000원</td>
+	<td>일반실</td>
+	<td><input type="button" value = "예약신청" placeholder="예약">
+</td>
+</tr> 
+<tr>
+	
+	<td>부산</td>
+	<td>50000원</td>
+	<td>일반실</td>
+	<td><input type="button" value = "예약신청" placeholder="예약">
+</tr>
+<tr>
+	
+	<td>부산</td>
+	<td>50000원</td>
+	<td>일반실</td>
+	<td><input type="button" value = "예약신청" placeholder="예약">
+
+</tr>
+</table>
+</body>
+</html>
