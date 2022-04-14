@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<style type="text/css">
+/* css 주석 처리
+선택자{ 속성명 }
+웹 폰트 : 
+*/
+@font-face {
+    font-family: 'LeeSeoyun';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/LeeSeoyun.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Yeongdo-Rg';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/Yeongdo-Rg.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+*{ /* 전체를 선택하여 꾸미기 */
+font-family: "궁서"; color: black;
+}
+h3{ /* h3 태그를 선택하여 꾸미기 */
+	font-family: "LeeSeoyun";
+	text-decoration: overline line-through underline;    
+					/* 윗줄  취소선(lint-through) 밑줄 */
+	text-align: center; /*폰트 정렬*/
+	text-shadow: 3px 3px 2px  yellow;  
+	/* 폰트 그림자   x  y   깊이   색상*/ 
+}
+p{ /* h3 태그를 선택하여 꾸미기 */
+	font-family: "Yeongdo-Rg";
+	background-color: "yellow";
+	line-height: 200%; /*줄 간격 기본값은 100% */
+	font-size: 20px; /* 폰트 크기 */
+	font-style: "italic"; /* 기울기 */
+	font-weight: "bold"; /*글씨 굵게 */
+	letter-spacing: 10px; /*자간 100% */
+	word-spacing: 5px /*단어 가격[어간]*/
+}
+a{ /* a 태그를 선택하여 꾸미기 */
+ text-decoration: none;  /* 밑줄 제거 */
+ color: black;
+ 
+}
+a:hover { /* a 태그에 마우스를 올렸을 때 */
+	color: orange;
+}
+a:visited { /* a 태그를 클릭한 기록이 있으면 */
+	color: blue;
+}
+a:active {  /* a 태그에 클릭했을 때 */
+	color: red;
+}
+</style>
+</head>
+<body>
+<!-- 
+	선택자(속성명 = 값)
+	1. font family : 글꼴
+	2. color : 글 색상
+	3. text-decoration
+ 			overline : 윗줄
+ 			underline : 아랫줄
+ 			line-through : 취소선
+ 	4. text-allign : 텍스트 정렬
+ 			center : 가운데 정렬
+ 			left : 왼쪽 정렬
+ 			right : 오른쪽 정렬
+ 	5. text-shadow : x축 y축 깊이 색상 : 그림자
+ 	6. line-height : 100% 기본값(줄간격)
+ 	7. word-spacing : 단어 간격(어간)
+ 	8. letter-spacing : 글자 간격(자간)
+ 	9. font-size : 글자 크기
+ 	10. font-size : italic 글자 기울기
+ 	11. font-weight : bold 글자 굵게
+ 	12. a tag 이벤트 선택자
+ 		a:hover{} : a 태그에 마우스를 올렸을 때
+ 		a:active{} : a 태그를 클릭했을 때
+ 		a:visited{} : a 태그를 클릭한 기록이 있으면 
+ -->
+<h3> 원숭이 </h3>
+<p> 안철수 인수위원장이 14일 공식 일정을 전격 취소했다. <br>
+인수위와 안 위원장 측에 따르면 안 위원장은 이날 오전 10시 30분으로 예정돼 있던 서울소방본부 현장 방문에 불참하겠다고 통보했다. <br>
+매일 언론에 공지되던 안 위원장의 일정도 알려지지 않은 상황이다. <br>
+안 위원장은 전날 윤석열 대통령 당선인과 인수위 관계자들이 함께할 예정이던 도시락 만찬에도 불참했다. <br>
+이를 두고 안 위원장이 내각 인선에 대한 불편한 심기를 드러낸 것이란 해석이 나왔다.
+</p>
+
+<a href="http://www.naver.com">네이버</a> 
+</body>
+</html>
