@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<style type="text/css">
+form{
+	width : 700px;	/*가로 사이즈*/
+	margin: 0px;	/*박스 모델 가운데정렬*/
+}
+table {
+	width : 700px;
+	border-top: solid 3px black;
+}
+td {
+	border-bottom: solid 1px #eeeeee;  /*아래쪽 테두리*/
+}
+input {
+	width : 300px;
+	height : 20px;
+}
+textarea {
+	width: 500px;
+	height: 30px;
+}
+.col1 {
+	width: 100px;
+	height: 20px;
+}
+#btns {
+width: 700px;
+text-align: right; /*텍스트, 버튼, 이미지 정렬위해서는 text-align 사용*/
+}
+#btns button {
+padding: 5px 10px; /*안쪽 여백*/
+margin: 15px 10px; /*바깥쪽 여백*/
+}
+</style>
+</head>
+<body>
+	<form> <!-- 폼 양식 [ 데이터 전송시 ] -->
+		<table> <!-- 테이블 태그 -->
+			<tr> <!-- 행 태그 -->
+				<td class="col1">이름</td>
+				<td>홍길동</td>
+			</tr> <!-- 행 end -->
+			<tr>
+				<td class="col1">제목</td>
+				<td> <input type="text"> </td>
+			</tr>
+			<tr>
+				<td class="col1">내용</td>
+				<td><textarea rows="" cols=""></textarea> </td>
+			</tr>
+			<tr>
+				<td>첨부파일</td>
+				<td><input type="file"> </td>
+			</tr>
+		</table> <!-- 테이블 end -->
+		<div id="btns">
+			<button>저장하긴</button>
+		    <button>목록보기</button>
+		</div>
+	</form> <!-- 폼 end -->
+</body>
+</html>
