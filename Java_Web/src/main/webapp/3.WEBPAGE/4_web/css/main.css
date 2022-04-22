@@ -1,0 +1,37 @@
+*{
+	padding: 0px;
+	margin: 0px;
+	font-family: 'InkLipquid';
+	font-size: 25px;
+}
+a{ text-decoration: none; color: black;}
+a:hover{ color: aqua;}
+
+.¿Ã∏ß{text-align: center;}
+.header_logo{
+	font-size: 50px;
+}
+@font-face {
+    font-family: 'InkLipquid';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/InkLipquid.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.carousel-item img{
+	width : 100%;
+}
+.item .title {
+	font-size: 30px; 
+}	
+.item .content{
+	font-size: 25px;
+	margin-bottom: 50px;
+}
+.item .price {
+	text-decoration: line-through;
+	color: gray;
+}
+.item .price2{
+	font-size: 30px;
+	font-weight: bold;
+}
