@@ -56,7 +56,7 @@
 			<div class="col-md-3 col-sm-6"> <!-- col-md-3 : col-md 760px; ÀÌ»ó½Ã col-sm : 570px ¾Æ·¡ÀÏ ½Ã -->
 				<div class="card">
 					<!-- Ä«µåÇü½Ä -->
-					<img class="card-img-top" alt="" src="img/¿ì¿Õ.gif">
+					<img class="card-img-top" alt="" src="img/·¹Àüµå.gif">
 					<div class="card-body">
 						<p class="item">
 						<span class="title"> ¿ì¿Õ ³î¶ó¿ý </span>
