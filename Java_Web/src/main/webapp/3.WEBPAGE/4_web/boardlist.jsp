@@ -88,7 +88,7 @@
 				</ul>
 			</div>
 			<div class="col-md-2 offset-2 my-3">
-				<button class="form-control">문의하기</button>
+				<a href="boardwrite.jsp"><button class="form-control">문의하기</button> </a>
 			</div>
 		</div>
 	</div>
