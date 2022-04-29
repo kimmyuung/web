@@ -3,42 +3,50 @@ package dto;
 public class Member {
 	
 	private int mnum;
-	private String id;
-	private String pw;
-	private String name;
+	private String mid;
+	private String mpw;
+	private String mname;
 	public Member() {}
 	
-	public Member(int mnum, String id, String pw, String name) {
+	public Member(int mnum, String mid, String mpw, String mname) {
 		super();
 		this.mnum = mnum;
-		this.id = id;
-		this.pw = pw;
-		this.name = name;
+		this.mid = mid;
+		this.mpw = mpw;
+		this.mname = mname;
 	}
-	
+
 	public int getMnum() {
 		return mnum;
 	}
+
 	public void setMnum(int mnum) {
 		this.mnum = mnum;
 	}
-	public String getId() {
-		return id;
+
+	public String getMid() {
+		return mid;
 	}
-	public void setId(String id) {
-		this.id = id;
+
+	public void setMid(String mid) {
+		this.mid = mid;
 	}
-	public String getPw() {
-		return pw;
+
+	public String getMpw() {
+		return mpw;
 	}
-	public void setPw(String pw) {
-		this.pw = pw;
+
+	public void setMpw(String mpw) {
+		this.mpw = mpw;
 	}
-	public String getName() {
-		return name;
+
+	public String getMname() {
+		return mname;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+	public void setMname(String mname) {
+		this.mname = mname;
 	}
+	
 	
 }
