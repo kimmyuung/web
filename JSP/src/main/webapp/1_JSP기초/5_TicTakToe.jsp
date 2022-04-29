@@ -24,9 +24,9 @@ Random random = new Random();
 			}
 			if(!board[Integer.parseInt(a)].equals("[ ]")){
 				while(true) {
-					int 위치 = random.nextInt(9);
-					if(board[위치].equals("[ ]")) {
-						board[위치] = "[x]";
+					int com = random.nextInt(9);
+					if(board[com].equals("[ ]")) {
+						board[com] = "[x]";
 						break;
 					}
 				}
