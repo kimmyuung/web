@@ -71,10 +71,10 @@ public class MemberDao {
 		String sql = "insert into board(btitle, bcontent, bwriter, bdate) values(?,?,?,?)";
 		try {
 			ps = con.prepareStatement(sql);
-			ps.setString(1, board.getTitle());
-			ps.setString(2, board.getContent());
-			ps.setString(3, board.getWriter());
-			ps.setString(4, board.getDate());
+			ps.setString(1, board.getBtitle());
+			ps.setString(2, board.getBcontent());
+			ps.setString(3, board.getBwriter());
+			ps.setString(4, board.getBdate());
 			ps.executeUpdate();
 			return true;
 		}catch (Exception e) {
@@ -84,7 +84,7 @@ public class MemberDao {
 	}
 	public ArrayList<Board> list() {
 		ArrayList<Board> blist = new ArrayList<Board>();
-		String sql = "select * from board order by bnum desc"; // desc : 내림차순
+		String sql = "select * from board order by bno desc"; // desc : 내림차순
 		try {
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
@@ -95,10 +95,59 @@ public class MemberDao {
 						);
 				blist.add(board);
 			}
+			
 			return blist;
 		}catch (Exception e) {
 			System.out.println("list error :" + e);
 		}
 		return null;
+	}
+	
+	public Board get(int bno) {
+		
+		String sql = "select * from board where bno=?"; // desc : 내림차순
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, bno);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				Board board = new Board(
+						rs.getInt(1), rs.getString(2),
+						rs.getString(3), rs.getString(4),
+						rs.getString(5)
+						);
+				
+				return board;
+			}
+		}catch (Exception e) {
+			System.out.println("board get error :" + e);
+		}
+		return null;
+	}
+	public boolean update(String title, String content, String date, int bno) {
+		String sql = "UPDATE board SET btitle = ?, bcontent = ?, bdate = ? where bno = ?;";
+		try {
+		ps = con.prepareStatement(sql);
+		ps.setString(1, title);
+		ps.setString(2, content);
+		ps.setString(3, date);
+		ps.setInt(4, bno);
+		ps.executeUpdate();
+		return true;
+		}
+		catch(Exception e) {System.out.println("수정 실패 : " + e);}
+		return false;
+	}
+	public boolean boarddelete(int bnum) {
+		try {
+			String sql = "delete from board where bno = ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, bnum);
+			ps.executeUpdate();
+			return true;
+		}catch (Exception e) {
+			System.out.println("삭제 오류 :" + e);
+		}
+		return false;
 	}
 }

@@ -1,51 +1,66 @@
 package dto;
 
 public class Board {
-	private int bnum;
-	private String title;
-	private String content;
-	private String writer;
-	private String date;
-	
-	public Board() {}
-	
-	public Board(int bnum, String title, String content, String writer, String date) {
+	private int bno; 
+	private String btitle;
+	private String bcontent;
+	private String bwriter;
+	private String bdate;
+
+	public Board() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Board(int bno, String btitle, String bcontent, String bwriter, String bdate) {
 		super();
-		this.bnum = bnum;
-		this.title = title;
-		this.content = content;
-		this.writer = writer;
-		this.date = date;
+		this.bno = bno;
+		this.btitle = btitle;
+		this.bcontent = bcontent;
+		this.bwriter = bwriter;
+		this.bdate = bdate;
 	}
-	public int getBnum() {
-		return bnum;
+
+	public int getBno() {
+		return bno;
 	}
-	public void setBnum(int bnum) {
-		this.bnum = bnum;
+
+	public void setBno(int bno) {
+		this.bno = bno;
 	}
-	public String getTitle() {
-		return title;
+
+	public String getBtitle() {
+		return btitle;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+
+	public void setBtitle(String btitle) {
+		this.btitle = btitle;
 	}
-	public String getContent() {
-		return content;
+
+	public String getBcontent() {
+		return bcontent;
 	}
-	public void setContent(String content) {
-		this.content = content;
+
+	public void setBcontent(String bcontent) {
+		this.bcontent = bcontent;
 	}
-	public String getWriter() {
-		return writer;
+
+	public String getBwriter() {
+		return bwriter;
 	}
-	public void setWriter(String writer) {
-		this.writer = writer;
+
+	public void setBwriter(String bwriter) {
+		this.bwriter = bwriter;
 	}
-	public String getDate() {
-		return date;
+
+	public String getBdate() {
+		return bdate;
 	}
-	public void setDate(String date) {
-		this.date = date;
+
+	public void setBdate(String bdate) {
+		this.bdate = bdate;
 	}
+	
+	
+	
 	
 }
