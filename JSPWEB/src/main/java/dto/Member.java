@@ -11,7 +11,7 @@ private String mphone;
 private String memail;
 private String maddress;
 private int mpoint;
-private LocalDateTime mdate;
+private String mdate;
 
 Member() {}
 
@@ -28,7 +28,7 @@ public Member(int mno, String mid, String mpw, String mname, String mphone, Stri
 }
 
 public Member(int mno, String mid, String mpw, String mname, String mphone, String memail, String maddress, int mpoint,
-		LocalDateTime mdate) {
+		String mdate) {
 	super();
 	this.mno = mno;
 	this.mid = mid;
@@ -122,12 +122,12 @@ public void setMpoint(int mpoint) {
 }
 
 
-public LocalDateTime getMdate() {
+public String getMdate() {
 	return mdate;
 }
 
 
-public void setMdate(LocalDateTime mdate) {
+public void setMdate(String mdate) {
 	this.mdate = mdate;
 }
 

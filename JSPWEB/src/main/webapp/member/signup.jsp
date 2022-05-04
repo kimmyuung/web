@@ -9,7 +9,7 @@
 <%@include file = "../header.jsp" %>
 <div class="container" style="background-image: url('../img/signup.jpg'); background-repeat: no-repeat; width: 100%">
 	<br><br>
-	<h3 style="text-align: center; color: white;"> 회원 페이지 </h3> <br> <br>
+	<h3 style="text-align: center; color: white;"> 회원 가입 페이지 </h3> <br> <br>
 	<form id="signupform" action="../signup" method="post">
 		<input type="text" id="mid" name="mid" placeholder="user id" >  <br> <br>
 		<span id="idcheck" class="text-white"></span> 

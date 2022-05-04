@@ -20,6 +20,20 @@
 	<div class="container">
 		<!--  공통  -->
 		<a href="/JSPWEB/main.jsp">home</a>
+		<a href="#">BIG SIZE</a>
+		<a href="#">MUSCLE-FIT</a>
+		<a href="#">one plus one</a>
+		<a href="#">Outer</a>
+		<a href="#">Inner</a>
+		<a href="#">Pants</a>
+		<a href="#">Shoes</a>
+		<a href="#">악세사리</a>
+		<a href="#">BEST</a>
+		<a href="#">트레이닝</a>
+		<a href="#">모델처럼 입자!</a>
+		<a href="#">50% sale</a>
+		<input type="text"><button>검색</button>
+		<a href="#"><img> 장바구니 이미지</a>
 		<!--  로그인이 안된 상태  -->
 		<% if( loginid == null ){ %>
 			<a href="/JSPWEB/member/login.jsp">로그인</a>
@@ -28,8 +42,8 @@
 		<!--  만약에 로그인된 상태 -->
 		<% if( loginid != null ){ %>
 			<span> <%=loginid %>님 </span>
-			<a href="logout">로그아웃</a>
-			<a href="/JSPWEB/member/memberinfo.jsp">회원정보</a>
+			<a href="/JSPWEB/logout">로그아웃</a>
+			<a href="/JSPWEB/member/myshopping.jsp">나의 쇼핑</a>
 		<%} %>
 		
 	</div>
