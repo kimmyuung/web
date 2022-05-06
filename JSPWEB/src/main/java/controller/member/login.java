@@ -53,6 +53,7 @@ public class login extends HttpServlet {
 		String mpassword = request.getParameter("mpassword");
 		// 2. 객체화 ( 데이터가 적기 때문에 생략 )
 		// 3. DB처리
+		
 		int result =  MemberDao.getmemberDao().login( mid , mpassword );
 		// 4. DB결과
 		if( result == 1   ) { // 로그인 성공 

@@ -15,10 +15,7 @@ import dao.BoardDao;
 import dao.MemberDao;
 import dto.Board;
 
-/**
- * Servlet implementation class boardwrite
- */
-@WebServlet("/board/write")
+@WebServlet("/board/write") // URL 정의 = 현재 클래스와 통신할 경로 설정
 public class write extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -34,42 +31,47 @@ public class write extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// 저장 경로
-		String uploadpath = "C:\\Users\\504\\git\\web\\JSPWEB\\src\\main\\webapp\\board\\upload";
+		
+		// 저장 경로 [    \ : 제어문자  ->  경로 사용시 \\ , / ]
+			// 1. 개발중인 프로젝트 경로 
+		// String uploadpath = "C:/Users/505-t/git/ezen_web_2022_A/jspweb/src/main/webapp/board/upload";
+			// 2. 서버 폴더 경로 
+				// 서버 경로 찾기 : request.getSession().getServletContext().getRealPath( 경로 ) ;
+		String uploadpath = request.getSession().getServletContext().getRealPath("/board/upload") ;
+		System.out.println(uploadpath);
+		// 첨부파일 업로드 [ MultipartRequest : cos 라이브러리 제공 클래스 ] 
 		MultipartRequest multi = new MultipartRequest(
-				request, // 요청방식
-				uploadpath, // 파일 저장 경로
-				1024*1024*10, // 파일 최대 용량 허용 범위
-				"UTF-8",  // 인코딩 타입
-				new DefaultFileRenamePolicy() // 동일한 파일명이 있을 경우 자동으로 이름 변환
-				);
+				request ,		// 1. 요청방식 
+				uploadpath , 	// 2. 파일 저장 경로 
+				1024*1024*10 ,	// 3. 파일 최대 용량 허용 범위 [ 10MB ] 
+				"UTF-8" ,		// 4. 인코딩타입 
+				new DefaultFileRenamePolicy() 	// 4. 보안방식 : 동일한 파일명이 있을경우 자동 이름 변환 
+				);	
+		// 데이터 요청 
+		String btitle = multi.getParameter("btitle");
+		String bcontent = multi.getParameter("bcontent");
+		String bfile = multi.getFilesystemName("bfile"); // 첨부파일 : getFilesystemName
 		
-		
-		request.setCharacterEncoding("UTF-8");
-		String btitle = request.getParameter("btitle");
-		String bcontent = request.getParameter("bcontent");
-		String bfile = request.getParameter("bfile");
-		HttpSession session = request.getSession();
-		String mid = (String)session.getAttribute("login");
+			HttpSession session = request.getSession();
+			String mid = (String)session.getAttribute("login");
+			
 		int mno = MemberDao.getmemberDao().getmno(mid);
+		// 객체화 
+		Board board = new Board( 0 , btitle, bcontent, mno, bfile, 0 , null, null);
+		System.out.print(board.toString());
+		// DB 처리
+		boolean result = BoardDao.getBoardDao().write(board);
+		// 결과 
+		if( result ) { response.sendRedirect("/JSPWEB/board/boardlist.jsp"); }
+		else { response.sendRedirect("/JSPWEB/board/boardwrite.jsp"); }
 		
-		// 객체화
-		Board board = new Board(0 , btitle, bcontent, mno, 0, null, null);
-		// db 처리
-		boolean result = BoardDao.getboardDao().write(board);
-		if(result) {response.sendRedirect("JSPWEB/board/boardlist.jsp");}
-		if(result) {response.sendRedirect("JSPWEB/board/boardwrite.jsp");}
-		
-		
-		doGet(request, response);
 	}
 
 }
