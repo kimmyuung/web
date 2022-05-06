@@ -16,11 +16,12 @@ public class BoardDao extends Dao {
 	// 1. 게시물 쓰기 메소드 	[ 인수 : 작성된 데이터들 = dto  ]
 	public boolean write( Board board ) { 
 	
-		String sql = "insert into board( btitle , bcontent , mno , bfile )values(?,?,?,?)";
+		String sql = "insert into board( btitle , bcontent , mno , bfile, mid )values(?,?,?,?,?)";
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setString( 1 , board.getBtitle() );	ps.setString( 2 , board.getBcontent() );
 			ps.setInt( 3 , board.getMno() );		ps.setString( 4 , board.getBfile() );
+			ps.setString(5, board.getMid());
 			ps.executeUpdate(); return true;
 		}catch (Exception e) { System.out.println( e ); }	return false; 
 	}
@@ -37,7 +38,7 @@ public class BoardDao extends Dao {
 						rs.getInt(1),rs.getString(2), 
 						rs.getString(3),rs.getInt(4),
 						rs.getString(5), rs.getInt(6),
-						rs.getString(7), null );
+						rs.getString(7), rs.getString(8) );
 				boardlist.add(board);
 			}
 			return boardlist;
@@ -60,4 +61,8 @@ public class BoardDao extends Dao {
 	public boolean replyupdate() { return false; }
 	// 10. 댓글 삭제 메소드 		[ 인수 : 삭제할 댓글 번호 ] 
 	public boolean replydelete() { return false; }
+	// 11. 게시물 번호 출력 메소드
+	public boolean getbnum() {
+		return false;
+	}
 }

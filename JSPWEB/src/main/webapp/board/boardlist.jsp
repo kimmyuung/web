@@ -1,3 +1,6 @@
+<%@page import="java.time.format.DateTimeFormatter"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.time.LocalDateTime"%>
 <%@page import="dao.BoardDao"%>
 <%@page import="dto.Board"%>
 <%@page import="java.util.ArrayList"%>
@@ -40,7 +43,25 @@
 					<td> <%=board.getBtitle() %> </td>
 					<td> <%=board.getMid() %> </td>
 					<td> <%=board.getBview() %> </td>
+					<tr>
+					<td> <%=board.getBno() %> </td>
+					<td> <a href="#" style="text-decoration: none;"><%=board.getBtitle() %></a></td>
+					<%if(board.getMid() == null){%>
+					<td> 비회원 </td>
+					<% }else{ %>
+					<td> <%=board.getMid() %> </td>
+					<%} %>
+					<td> <%=board.getBview() %> </td>
+					<%
+					String formatDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+					String olddate = board.getBdate();
+					String lsfo = olddate.split(" ")[0];
+					String timd =  olddate.split(" ")[1];
+					if(lsfo.equals(formatDate)){%>
+					<td> <%= timd%> </td>
+					<% }else{ %>
 					<td> <%=board.getBdate() %> </td>
+					<%} %>			
 				</tr>
 			<%
 				}

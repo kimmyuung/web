@@ -45,7 +45,7 @@ public class write extends HttpServlet {
 			// 2. 서버 폴더 경로 
 				// 서버 경로 찾기 : request.getSession().getServletContext().getRealPath( 경로 ) ;
 		String uploadpath = request.getSession().getServletContext().getRealPath("/board/upload") ;
-		System.out.println(uploadpath);
+		
 		// 첨부파일 업로드 [ MultipartRequest : cos 라이브러리 제공 클래스 ] 
 		MultipartRequest multi = new MultipartRequest(
 				request ,		// 1. 요청방식 
@@ -63,13 +63,16 @@ public class write extends HttpServlet {
 			String mid = (String)session.getAttribute("login");
 			
 		int mno = MemberDao.getmemberDao().getmno(mid);
+		String id = MemberDao.getmemberDao().getmid(mno);
+		
 		// 객체화 
-		Board board = new Board( 0 , btitle, bcontent, mno, bfile, 0 , null, null);
-		System.out.print(board.toString());
+		Board board = new Board( 0 , btitle, bcontent, mno, bfile, 0 , null, mid);
 		// DB 처리
 		boolean result = BoardDao.getBoardDao().write(board);
 		// 결과 
-		if( result ) { response.sendRedirect("/JSPWEB/board/boardlist.jsp"); }
+		if( result ) { 
+			response.sendRedirect("/JSPWEB/board/boardlist.jsp"); 
+		}
 		else { response.sendRedirect("/JSPWEB/board/boardwrite.jsp"); }
 		
 	}
