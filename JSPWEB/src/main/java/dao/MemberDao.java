@@ -105,23 +105,42 @@ public class MemberDao extends Dao {
 		
 		return false;
 	}
-	// 회원 수정 메소드
-	public boolean update(Member member) {
-		
-				try {
-					String sql = "update member set mname = ? , memail = ?,"
-							+ "maddress = ?, mphone = ? where mno = ?";
-					ps = con.prepareStatement(sql);
-					ps.setString(1, member.getMname());
-					ps.setString(2, member.getMemail());
-					ps.setString(3, member.getMaddress());
-					ps.setString(4, member.getMphone());
-					ps.setInt(5, member.getMno());
-					ps.executeUpdate();
-					return true;
-				}catch(Exception e) {
-					System.out.println("회원 정보 수정 오류" + e);
-				}
-		return false;
+	public boolean update( Member member ) {
+		try {
+		if( member.getMpw() == null ) { // 패스워드 변경이 없을때 
+			String sql ="update member set mname=? ,  mphone=? , memail=?,"
+					+ "maddress = ? where mno=?";
+				ps = con.prepareStatement(sql);
+				ps.setString( 1 , member.getMname() );
+				ps.setString( 2 , member.getMphone() );
+				ps.setString( 3 , member.getMemail() );
+				ps.setString( 4 , member.getMaddress() );
+				ps.setInt( 5, member.getMno() );
+		}else {	// 패스워드가 변경이 있을때 
+			String sql ="update member set mname=? , mpw = ? ,  mphone=? , memail=?,"
+					+ "maddress = ? where mno=?";
+				ps = con.prepareStatement(sql);
+				ps.setString( 1 , member.getMname() );
+				ps.setString( 2 , member.getMpw() );
+				ps.setString( 3 , member.getMphone() );
+				ps.setString( 4 , member.getMemail() );
+				ps.setString( 5 , member.getMaddress() );
+				ps.setInt( 6 , member.getMno() );
+		}
+			ps.executeUpdate(); return true;
+		}catch (Exception e) {} return false;
+	}
+	// 회원번호 출력 
+	public int getmno(String mid) {
+		String sql = "select mno from member where mid =?";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, mid);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
+		}catch(Exception e) {System.out.println("회원번호 출력 오류" + e);}
+		return 0;
 	}
 }

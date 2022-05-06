@@ -19,17 +19,35 @@
 			<%@include file="infosidebar.jsp" %>
 			</div>
 			<div class="col-md-9">
-			<% if(request.getParameter("result") != null && request.getParameter("result").equals("1")) { %>
-				<div> 회원정보가 수정되었습니다.</div>
-			<%} %> 
-			<% else { %>
-			<div>회원정보 수정 실패</div>
-			<%} %>
+			<%
+					if( request.getParameter("result") != null 
+							&& request.getParameter("result").equals("1") ){
+				%>
+					<div> 회원정보가 수정 되었습니다.!!! </div>
+				<%
+					}else if( request.getParameter("result") != null 
+					&& request.getParameter("result").equals("2")  ){
+				%>	
+					<div> 회원정보가 실패!! 관리자에게문의 </div>
+				
+				<%
+					}else if( request.getParameter("result") != null 
+					&& request.getParameter("result").equals("2")  ){
+				%>	
+					<div> 회원정보가 실패!! 관리자에게문의 </div>
+				<% 	
+					}
+				%>
+				
 			<h3>회원 수정</h3>
 			<form action="../update" method="post"> <!-- update 서블릿 파일로 post 전송 -->
 			<input type="hidden" value="<%=member.getMno()%>" name="mno">
 			아이디 : <%=member.getMid() %> <br>
-			비밀번호 : <button type="button">비밀번호 변경</button>
+			비밀번호 : <button type="button" onclick="passwordchange()">비밀번호 변경</button>
+			<div id="passwordbox" style="display: none;"> 
+			기존 비밀번호 : <input type="password" name="oldpassword"><br>
+			새로운 비밀번호 : <input type="password" name="newpassword">
+			</div>
 			이름 : <input type="text" value="<%=member.getMname() %>" name="mname">  <br>
 			연락처 : <input type="text" value="<%=member.getMphone() %>" name="mphone">  <br>
 			이메일 : <input type="text" value="<%=member.getMemail().split("@")[0] %>" name="memail"> @

@@ -23,7 +23,7 @@
 		<span id="phonecheck" class="text-white"></span> <br><br>
 		<br>
 		<input type="text" id="memail" name="memail" placeholder="user email"> 
-		@
+		<p class="text-white">@</p>
 		<input type="text" id="memailaddress" name="memailaddress" > 
 		<select id="emailselect">
 			<option value=""> 직접입력 </option>

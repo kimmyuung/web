@@ -44,6 +44,7 @@
 			<span> <%=loginid %>님 </span>
 			<a href="/JSPWEB/logout">로그아웃</a>
 			<a href="/JSPWEB/member/myshopping.jsp">나의 쇼핑</a>
+			<a href="/JSPWEB/board/boardlist.jsp">고객센터</a>
 		<%} %>
 		
 	</div>

@@ -108,7 +108,6 @@ $( function(){  // 문서 열리면 해당 코드가 실행
 		}
 	}); // keyup end 
 	
-	// 이메일 체크 
 	$("#memail").keyup( function(){
 		let memail = $("#memail").val();
 		let memailaddress = $("#memailaddress").val();
@@ -116,7 +115,7 @@ $( function(){  // 문서 열리면 해당 코드가 실행
 		if( memailaddress == "" ){ 
 			$("#emailcheck").html("이메일 주소 입력해주세요~");  pass[5] = false;
 		}else{
-			let emailj = /^[a-zA-Z0-9]{3,20}@[a-z]{3,8}.[a-z]{1,4}$/;
+			let emailj = /^[a-zA-Z0-9]{3,20}$/;
 			if( emailj.test(memail) ){
 				// 이메일 중복체크 
 				let email = memail+"@"+memailaddress;
@@ -126,7 +125,7 @@ $( function(){  // 문서 열리면 해당 코드가 실행
 					success : function( result ){
 						if( result == 1 ){
 							$("#emailcheck").html("사용중인 이메일 입니다."); pass[5] = false;
-						}else{mr
+						}else{
 							$("#emailcheck").html("사용가능한 이메일 입니다."); pass[5] = true;
 						}
 					}
@@ -145,7 +144,6 @@ $( function(){  // 문서 열리면 해당 코드가 실행
 		if( emailselect == "" ){
 			$("#memailaddress").val("");
 			$("#memailaddress").attr("readonly" , false); // 읽기모드 취소
-			
 		}else{
 			$("#memailaddress").val(emailselect);	// val() -> value 값
 			$("#memailaddress").attr("readonly" , true); // attr -> attribute 속성
@@ -232,7 +230,11 @@ function signup(){
         }).open();
     }
    
-    
+function passwordchange() {
+	$("#passwordbox").css("display", "block");
+}    
+
+
 
 
 
