@@ -15,9 +15,10 @@ public class MemberDao extends Dao {
 	
 	// 아이디 중복체크 메소드
 	public boolean idcheck( String mid ) {
-		String sql = "select * from member where mid = '"+mid+"'";
+		String sql = "select * from member where mid = ?";
 		try {
 			ps = con.prepareStatement(sql);
+			ps.setString(1, mid);
 			rs = ps.executeQuery();	
 			// 동일한 아이디가 존재하면 
 			if( rs.next() ) { return true; } 
@@ -27,21 +28,23 @@ public class MemberDao extends Dao {
 	}
 	// 이메일 중복체크 메소드 
 	public boolean emailcheck( String email ) {
-		String sql = "select * from member where memail = '"+email+"'";
-		try {  ps = con.prepareStatement(sql); rs= ps.executeQuery(); if( rs.next() ) return true;
+		String sql = "select * from member where memail = ?";
+		try {  ps = con.prepareStatement(sql); ps.setString(1, email); 
+		ps.executeQuery(); if( rs.next() ) return true;
 		}catch (Exception e) {} return false;
 	}
 	// 회원가입 메소드 
 	public boolean signup( Member member ) {
 		String sql ="insert into member(mid,mpw,mname,mphone,memail,maddress) "
 				+ "value(?,?,?,?,?,?)";
+		System.out.print("오 8분전");
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setString( 1 , member.getMid() ); 	ps.setString( 2 , member.getMpw() ); 
 			ps.setString( 3 , member.getMname() );	ps.setString( 4 , member.getMphone() ); 
 			ps.setString( 5 , member.getMemail()); 	ps.setString( 6 , member.getMaddress());
 			ps.executeUpdate(); return true;
-		}catch (Exception e) {} return false;
+		}catch (Exception e) {System.out.print(e);} return false;
 	}
 	
 	// 로그인 메소드 

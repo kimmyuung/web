@@ -15,8 +15,8 @@ public class BoardDao extends Dao {
 	
 	// 1. 게시물 쓰기 메소드 	[ 인수 : 작성된 데이터들 = dto  ]
 	public boolean write( Board board ) { 
-		
-		String sql = "insert into board( btitle , bcontent , bwriter , bfile )values(?,?,?,?)";
+	
+		String sql = "insert into board( btitle , bcontent , mno , bfile )values(?,?,?,?)";
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setString( 1 , board.getBtitle() );	ps.setString( 2 , board.getBcontent() );
