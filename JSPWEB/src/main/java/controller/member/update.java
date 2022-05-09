@@ -8,7 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
+import dao.BoardDao;
 import dao.MemberDao;
+import dto.Board;
 import dto.Member;
 
 /**
@@ -29,10 +34,14 @@ public class update extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
+	
+		
+	
+}	
+		
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -61,10 +70,6 @@ public class update extends HttpServlet {
 		String address = address1 + "_" + address2 + "_" + address3 + "_" + address4;
 	
 		Member member = null;
-		
-		
-		
-		
 		
 		if(oldpassword.equals("") || newpassword.equals("")) {
 			// 패스워드 변경이 없을때

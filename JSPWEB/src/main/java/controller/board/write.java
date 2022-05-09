@@ -38,7 +38,7 @@ public class write extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		System.out.println("dd");
 		// 저장 경로 [    \ : 제어문자  ->  경로 사용시 \\ , / ]
 			// 1. 개발중인 프로젝트 경로 
 		// String uploadpath = "C:/Users/505-t/git/ezen_web_2022_A/jspweb/src/main/webapp/board/upload";

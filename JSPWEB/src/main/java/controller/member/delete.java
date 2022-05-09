@@ -29,7 +29,6 @@ public class delete extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("ajax 서버 통신 성공");
 		String mid = request.getParameter("mid");
 		boolean result = 
 				MemberDao.getmemberDao().delete(mid);
