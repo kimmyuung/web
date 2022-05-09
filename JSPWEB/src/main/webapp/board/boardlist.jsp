@@ -56,9 +56,10 @@
 					String formatDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 					String olddate = board.getBdate();
 					String lsfo = olddate.split(" ")[0];
-					String timd =  olddate.split(" ")[1];
+					String time =  olddate.split(
+							" ")[1];
 					if(lsfo.equals(formatDate)){%>
-					<td> <%= timd%> </td>
+					<td> <%= time%> </td>
 					<% }else{ %>
 					<td> <%=board.getBdate() %> </td>
 					<%} %>			
