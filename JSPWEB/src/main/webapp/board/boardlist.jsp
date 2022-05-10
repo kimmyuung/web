@@ -31,10 +31,12 @@
 			</tr>
 			<!-- for 문 -->
 			<%
+				
 				// 1. 모든 게시물  호출 
 				ArrayList<Board> boardlist = 
 					BoardDao.getBoardDao().getboardlist();
 				for( Board board : boardlist ){
+					int count = BoardDao.getBoardDao().replycount(board.getBno());
 					
 			%>
 			<!-- 행을 클릭했을 떄 -->
@@ -46,7 +48,8 @@
 				-->
 				<tr>
 					<td> <%=board.getBno() %> </td>
-					<td> <a href="boardview.jsp?bno=<%=board.getBno() %>"><%=board.getBtitle() %></a></td>
+					<td> <a href="boardview.jsp?bno=<%=board.getBno() %>"><%=board.getBtitle() %></a> (<%=count %>) 
+					</td>
 					<td> <%=board.getMid() %> </td>
 					<td> <%=board.getBview() %> </td>
 					<%

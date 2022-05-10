@@ -29,6 +29,7 @@
 			}
 			
 			Board board =  BoardDao.getBoardDao().getboard(bno); 			// 게시물번호로 게시물 dto 가져오기 
+			int count = BoardDao.getBoardDao().replycount(bno);
 		%>
 	
 	
@@ -74,7 +75,7 @@
 			</div>
 		</div>
  <!----------------------------------- 댓글 구역 쓰기 -------------------------------------------------------------------->		
-		<h4 class = "boardview_title">댓글</h4>	
+		<h4 class = "boardview_title">댓글 (<%=count %>)</h4> 	
 		<% if( mid != null ){  //로그인이 되어있으면 %>
 		<div class="row"> <!-- row : 가로배치 -->
 			<div class="col-md-10">
@@ -100,7 +101,9 @@
 				<td width="80%" colspan="2">
 					<%=reply.getRcontent() %> <br> 
 				<% if( mid !=null && mid.equals( reply.getMid() ) ){ // 본인 작성한 댓글이면 %>
-					<button class="btn replybtn"> 수정 </button>
+					<button class="btn replybtn" onclick="replyupdateshow()"> 수정 </button>
+					<button style="display: none;" id="updatecontext" class="btn replybtn" onclick="replyupdate(<%=reply.getRno()%>,<%=reply.getBno()%>)" >수정 완료</button>
+					<textarea style="display: none;" id="updatecontent"></textarea>
 					<button type="button" class="btn replybtn" onclick="replydelete(<%=reply.getRno()%>)"> 삭제 </button>
 				<%} %>
 					<button class="btn replybtn" onclick="rereplyview(<%=reply.getRno()%> , <%=reply.getBno()%> , '<%=mid%>' )"> 
@@ -117,7 +120,7 @@
 			<!-- 대댓글 출력창  -->
 			<%ArrayList<Reply> rereplylist = BoardDao.getBoardDao().rereply( bno , reply.getRno() );
 				if(rereplylist != null) {
-				for( Reply rereply : rereplylist ){%>
+				for( Reply rereply : rereplylist ){ %>
 				<tr>
 					<td></td>
 					<td width="10%" class="replywriter">
@@ -127,7 +130,9 @@
 					<td width="80%">
 						<%=rereply.getRcontent() %> <br> 
 					<% if( mid != null && mid.equals( rereply.getMid() ) ){ %>
-						<button class="btn replybtn"> 수정 </button>
+						<button class="btn replybtn" onclick="rereplyupdateshow()"> 수정 </button>
+						<button style="display: none;" id="reupdatecontext" class="btn replybtn" onclick="rereplyupdate(<%=rereply.getRno()%> ,<%=rereply.getBno()%>)" >수정 완료</button>
+						<textarea style="display: none;" id="reupdatecontent"></textarea>
 						<button class="btn replybtn" onclick="replydelete(<%=rereply.getRno()%>)"> 삭제 </button>
 					<%} %>
 					</td>

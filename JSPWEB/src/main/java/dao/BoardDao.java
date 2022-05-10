@@ -2,6 +2,8 @@ package dao;
 
 import java.util.ArrayList;
 
+import com.mysql.cj.xdevapi.Statement;
+
 import dto.Board;
 import dto.Reply;
 
@@ -129,9 +131,18 @@ public class BoardDao extends Dao {
 	
 	}
 	
-	
 	// 9. 댓글 수정 메소드 		[ 인수 : 수정할 댓글 번호 ]
-	public boolean replyupdate() { return false; }
+	public boolean replyupdate(Reply reply) { 
+		String sql = "update reply set rcontent = ? where rno = ?";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, reply.getRcontent());
+			ps.setInt(2, reply.getRno());
+			ps.executeUpdate();
+			return true;
+		}catch(Exception e) {e.printStackTrace();}
+		return false; }
+	
 	// 10. 댓글 삭제 메소드 		[ 인수 : 삭제할 댓글 번호 ] 
 	public boolean replydelete(int rno) { 
 		String sql = "delete from reply where rno = ?";
@@ -160,11 +171,9 @@ public class BoardDao extends Dao {
 	// 대댓글 출력 메소드 [인수 : 게시물 번호, 댓글 식별번호)
 	public ArrayList<Reply> rereply(int bno, int rno) {
 		ArrayList<Reply> rereplylist = new ArrayList<Reply>();
-		String sql = "selecct * from reply where bno = ? and rindex = ?";
+		String sql = "select * from reply where bno = "+bno+" and rindex = "+rno;
 		try {
 			ps = con.prepareStatement(sql);
-			ps.setInt(1, bno);
-			ps.setInt(2, rno);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				Reply reply = new Reply( 
@@ -177,5 +186,21 @@ public class BoardDao extends Dao {
 		}catch(Exception e) {e.printStackTrace();}
 		return null;
 	}
+	// 댓글 카운트
+	public int replycount(int bno) {
+		String sql = "select count(*) from reply where bno=?";
+		int count = 0;
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, bno);
+			rs = ps.executeQuery();
+		
+			if(rs.next()) count = rs.getInt(1);
+			
+			return count;
+		}catch(Exception e) {e.printStackTrace();}
+		return 0;
+	}
+	
 	
 }

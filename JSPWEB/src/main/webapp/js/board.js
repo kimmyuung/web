@@ -97,4 +97,41 @@ function replydelete( rno ){
 		}
 	});
 }
-
+function replyupdateshow() {
+	$("#updatecontent").css("display", "block");
+	$("#updatecontext").css("display", "block");
+}
+function rereplyupdateshow() {
+	$("#reupdatecontext").css("display", "block");
+	$("#reupdatecontent").css("display", "block");
+}
+function replyupdate(rno, bno) {
+	
+	let updatecontent = $("#updatecontent").val();
+	$.ajax({
+		url : "replyupdate" , 
+		data : { "rno" : rno , "updatecontent" : updatecontent, "bno" : bno} , 
+		success : function( result ){
+			if( result == 1 ){
+				alert("댓글 수정 되었습니다.");
+				$("#replytable").load( location.href+" #replytable"); // 특정 태그 새로고침
+			}
+			else{ alert("수정 실패(관리자에게 문의)"); } 
+		}
+	});
+	
+}
+function rereplyupdate(rno, bno) {
+	let reupdatecontent = $("#reupdatecontent").val();
+	$.ajax({
+		url : "replyupdate" , 
+		data : { "rno" : rno , "reupdatecontent" : reupdatecontent, "bno" : bno} , 
+		success : function( result ){
+			if( result == 1 ){
+				alert("댓글 수정 되었습니다.");
+				$("#replytable").load( location.href+" #replytable"); // 특정 태그 새로고침
+			}
+			else{ alert("수정 실패(관리자에게 문의)"); } 
+		}
+	});
+}
