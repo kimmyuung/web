@@ -1,6 +1,5 @@
 package dto;
 
-import java.time.LocalDateTime;
 
 public class Member {
 private int mno;
