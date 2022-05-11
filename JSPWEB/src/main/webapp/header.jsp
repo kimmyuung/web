@@ -37,7 +37,7 @@
 						<li> <a href="/JSPWEB/logout"  class="header_topmenu">로그아웃</a> · </li>
 						<li> <a href="/JSPWEB/member/myshopping.jsp"  class="header_topmenu">나의쇼핑</a> · </li>
 					<%} %>
-						<li> <a href="/JSPWEB/board/boardlist.jsp"  class="header_topmenu">자유게시판</a> </li>
+						<li> <a href="/JSPWEB/board/boardlist.jsp?key=&keyword="  class="header_topmenu">자유게시판</a> </li>
 					</ul>
 				</div>
 			</div>

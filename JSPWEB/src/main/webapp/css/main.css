@@ -62,3 +62,18 @@ textarea {
 .dropdown:hover .dropdown-menu{
 	display: block;
 }
+
+.boardlist_title{
+	width : 20%;
+	border-bottom: 1px solid black;
+	padding : 5px;
+	margin : 10px 0px 50px 0px;
+	
+}
+.boardlist_btn {
+	margin: 20px 0px;
+}
+.pagenum{
+	color: black;
+	font-size: 12px;
+}

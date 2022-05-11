@@ -32,6 +32,8 @@
 			<!-- for 문 -->
 			<%
 				// 1. 모든 게시물  호출 
+				String key = "";
+				String keyword = "";
 				ArrayList<Board> boardlist = 
 					BoardDao.getBoardDao().getboardlist();
 				for( Board board : boardlist ){
