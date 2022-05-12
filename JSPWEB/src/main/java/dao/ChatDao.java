@@ -15,32 +15,31 @@ public class ChatDao extends Dao{
 	public static ChatDao ChatDao = new ChatDao();
 	public static ChatDao getChatDao() { return ChatDao; }
 	
-	public ArrayList<Chat> clist () {
-		ArrayList<Chat> clist = new ArrayList<Chat>();
-		String nowtime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss"));
-		String sql = "select * from chat where cdate > ? order by cdate";
+	public ArrayList<Chat> Chatlist(){
+		String sql = "SELECT * FROM chat  ORDER BY cdate asc";
+		ArrayList<Chat> chList = new ArrayList<Chat>();
 		try {
 			ps = con.prepareStatement(sql);
-			ps.setString(1, nowtime);
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				Chat chat = new Chat(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
-				clist.add(chat);
+				chList.add( new Chat(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4)) );
 			}
-			return clist;
-		}catch(Exception e) {e.printStackTrace();}
+			return chList;
+		} catch (Exception e) {
+			System.out.println("[SQL 오류]" + e);
+		}
 		return null;
 	}
 	
-	public int chat_result(String cname, String ccontent) {
+	public boolean chat_result(String cname, String ccontent) {
 		String sql = "insert into chat(cname, ccontent) values(?,?)";
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setString(1, cname);
 			ps.setString(2, ccontent);
 			ps.executeUpdate();
-			return 1;
+			return true;
 			}catch(Exception e) {e.printStackTrace(); }
-		return 2;
+		return false;
 	}
 }

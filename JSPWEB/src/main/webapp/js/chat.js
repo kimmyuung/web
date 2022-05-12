@@ -1,50 +1,39 @@
-function chat() {
-	var chatName = $("#chatName").val();
-	var chatContent = $("#chatContent").val();
-	
+$(function(){
+	timer = setInterval( function() {
 	$.ajax({
-		url : "../chatting" ,
-		data : {
-			"chatName" : chatName,
-			"chatContent" : chatContent
-		} ,
-		success : function(result) {
-			if(result == 1) {
-				alert("채팅 성공");
-			}
-			else {
-				alert("채팅 실패");
-			}
-		}
-	});
-	$("#chatContent").val = "";
-}
-
-$(function() {
-	timer = setInterval( function () {
-	    $.ajax ({
-	        url : "../chatreceive",
-	        cache : false,
-	        success : function ( result ) {
-				
-		        var co =  result.split(",");
-		        
-		        var contents = "";
-		        
-		        for( var i = 0 ; i<co.length-1 ; i++ ){
-					
+		url : "../chatreceive",
+		cache : false,
+		success : function(result){
+			var co =  result.split(",");
+			var contents = "";
+			 for( var i = 0 ; i<co.length-1 ; i++ ){
 						contents += 
-					 
-						'<div class="col-md-2">'+co[i].split("_")[0]+'</div>'+
-						'<div class="col-md-6">'+co[i].split("_")[1]+'</div>'+
-						'<div class="col-md-4">'+co[i].split("_")[2]+'</div>'
-					;
+					 '<div class="box" style="style="border: 1px solid black;"">'+
+						'<div class="nicname" style="color: #3281a8;">'+co[i].split("_")[0]+'</div>'+
+						'<div class="content">'+co[i].split("_")[1]+'</div>'+
+						'<div class="date">'+co[i].split("_")[2].split(" ")[1]+'</div>'+
+					'</div>'
 					
 				}
-				
 				$("#contentlist").html( contents );
 				$('#contentlist').scrollTop($('#contentlist')[0].scrollHeight);
-	        }
-	    });
-	    }, 50);
+		}
+	});
+	}, 5000);
+	
+	
 });
+
+function send(){
+	let cname = $("#nicname").val();
+	let ccontent = $("#content").val();
+	$.ajax({
+		url : "../chatting",
+		data: {"cname" : cname, "ccontent" : ccontent},
+		success : function(result){
+			if(result) {}
+			else {}
+			$("#content").val("");
+		}
+	});
+}

@@ -12,6 +12,7 @@ String mid = (String)session.getAttribute("login");
 %>
 	<%@include file="../header.jsp"%>
 	<div class="container">
+	<%if(mid != null){ %>
 		<div class="row">
 			<div class="col-md-3">
 			<%@include file="infosidebar.jsp" %>
@@ -26,6 +27,10 @@ String mid = (String)session.getAttribute("login");
 			
 			</div>
 		</div>
+		<%} %>
+		<%if(mid == null) { %>
+		<span> 로그인후에 이용해주세요</span>
+		<%} %>
 	</div>
 	<script src="../js/info.js" type="text/javascript"></script>
 	<%@include file="../footer.jsp"%>

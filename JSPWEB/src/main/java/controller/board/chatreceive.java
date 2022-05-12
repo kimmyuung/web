@@ -9,16 +9,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controller.board.chatting;
 import dao.ChatDao;
 import dto.Chat;
 
 /**
- * Servlet implementation class chatreceive
+ * Servlet implementation class chatList
  */
 @WebServlet("/chatreceive")
-
 public class chatreceive extends HttpServlet {
-	
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -32,16 +31,13 @@ public class chatreceive extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		
-		String result = "";
-		for(Chat temp : ChatDao.getChatDao().clist()) {
-			result += temp.getCname() + "_" + temp.getCcontent() + "_" + temp.getCdate() +",";
-			
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		String chat = "";
+		for(Chat temp : chatting.chList) {
+			chat += temp.getCname()+"_"+temp.getCcontent()+"_"+temp.getCdate()+",";
 		}
-		response.getWriter().print(result);
-		
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().print(chat);	
 	}
 
 	/**
@@ -51,5 +47,5 @@ public class chatreceive extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-	
+
 }

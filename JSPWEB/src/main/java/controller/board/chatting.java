@@ -17,7 +17,7 @@ import dto.Chat;
  */
 @WebServlet("/chatting")
 public class chatting extends HttpServlet {
-	public static ArrayList<Chat> clist = ChatDao.getChatDao().clist();
+	public static ArrayList<Chat> chList = new ArrayList<Chat>();
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -33,14 +33,15 @@ public class chatting extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		String ccontent = request.getParameter("chatContent");
-		String cname = request.getParameter("chatName");
-		int result = ChatDao.getChatDao().chat_result(cname, ccontent);
-		if (result == 1){
-			response.sendRedirect("JSPWEB/train/chat.jsp");
-		}
-		else {
-			response.sendRedirect("JSPWEB/error.jsp");
+		String cname = request.getParameter("cname");
+		String ccontent = request.getParameter("ccontent");
+		
+		boolean result = ChatDao.getChatDao().chat_result(cname, ccontent);
+		if(result) {
+			chList = ChatDao.getChatDao().Chatlist();
+			response.getWriter().print(1);
+		}else {
+			response.getWriter().print(2);
 		}
 	}
 

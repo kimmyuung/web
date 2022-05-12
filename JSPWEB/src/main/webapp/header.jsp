@@ -31,12 +31,17 @@
 					<% if( loginid == null ){ %> <!--  로그인이 안된 상태 = 만약에 세션이 없으면  -->
 						<li> <a href="/JSPWEB/member/login.jsp" class="header_topmenu">로그인</a> · </li>
 						<li> <a href="/JSPWEB/member/signup.jsp"  class="header_topmenu">회원가입</a> · </li> 
+					<%} else if( loginid.equals("admin") )  {%>
+					
+						<li> <a href="/JSPWEB/admin/dashboard.jsp" class="header_topmenu">관리자모드</a> </li>
 					<%} %>
+					
 					<% if( loginid != null ){ %> <!--  만약에 로그인된 상태 = 만약에 세션이 있으면 -->
 						<li> <span  class="header_topmenu"> <%=loginid %>님 </span> · </li>
 						<li> <a href="/JSPWEB/logout"  class="header_topmenu">로그아웃</a> · </li>
 						<li> <a href="/JSPWEB/member/myshopping.jsp"  class="header_topmenu">나의쇼핑</a> · </li>
 					<%} %>
+					
 						<li> <a href="/JSPWEB/board/boardlist.jsp?key=&keyword="  class="header_topmenu">자유게시판</a> </li>
 					</ul>
 				</div>
