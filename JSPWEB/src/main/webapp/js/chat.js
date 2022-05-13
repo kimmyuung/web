@@ -9,7 +9,7 @@ $(function(){
 			 for( var i = 0 ; i<co.length-1 ; i++ ){
 						contents += 
 					 '<div class="box" style="style="border: 1px solid black;"">'+
-						'<div class="nicname" style="color: #3281a8;">'+co[i].split("_")[0]+'</div>'+
+						'<div class="nicname" style="color: black;">'+co[i].split("_")[0]+'</div>'+
 						'<div class="content">'+co[i].split("_")[1]+'</div>'+
 						'<div class="date">'+co[i].split("_")[2].split(" ")[1]+'</div>'+
 					'</div>'
@@ -19,7 +19,7 @@ $(function(){
 				$('#contentlist').scrollTop($('#contentlist')[0].scrollHeight);
 		}
 	});
-	}, 5000);
+	}, 100);
 	
 	
 });
