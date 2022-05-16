@@ -113,9 +113,9 @@ public class ProductDao extends Dao{
 			}catch(Exception e) {e.printStackTrace();}
 			return false; }
 		// 2. 제품의 재고 호출 
-		public ArrayList<Stock> getStock() { 
+		public ArrayList<Stock> getStock(int pno ) { 
 			ArrayList<Stock> stocks = new ArrayList<Stock>();
-			String sql = "select * from stock";
+			String sql = "select * from stock where pno = "+pno;
 			try {
 				ps = con.prepareStatement(sql);
 				rs = ps.executeQuery();
@@ -131,6 +131,14 @@ public class ProductDao extends Dao{
 			return null;
 			}
 		// 3. 제품의 재고 수정 
+		public boolean stockupdate( int sno , int samount ) {
+			String sql = "update stock set samount = "+samount+" where sno="+sno;
+			try {
+				ps = con.prepareStatement(sql);
+				ps.executeUpdate(); return true;
+			}catch (Exception e) { System.out.println( e ); } return false;
+			
+		}
 		// 4. 제품의 재고 삭제
 	//////////////////////////////////////////////////////////////////////////
 		

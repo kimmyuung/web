@@ -7,23 +7,24 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h3>제품 재고</h3>
-제품목록
-<select id="categorybox">
-</select>
-<select id="productbox">
-</select>
-
- 	
- 	<form id="stockaddform" style="display: none">
- 	색상 : <input type="text" id="scolor">
- 	사이즈 : <input type="text" id="ssize">
- 	수량 : <input type="text" id="saomount">
- 	<button type="button" onclick="stockadd()">재고 추가</button>
- 	</form>
+<h3> 제품 재고 </h3>
+	카테고리 목록 
+	<select id="categorybox"> <!-- 카테고리가 출력되는 부분 -->
+	</select>
+	제품 목록
+	<select id="productbox"> <!-- 제품명이 출력되는 부분  -->
+	</select>
+	<form id="stockaddform" style="display: none;">
+		색상 <input type="text" id="scolor">
+		사이즈 <input type="text" id="ssize">
+		수량 <input type="text" id="samount">
+		<button type="button" onclick="stockadd()"> 재고 추가 </button>
+	</form>
 	
-	재고 목록
-	<div id="stocklistbox"></div>
+	재고 목록 
+	<table id="stocklistbox"> 
+	
+	</table>
 	
 <script src="/JSPWEB/js/productstock.js" type="text/javascript"></script>
 </body>

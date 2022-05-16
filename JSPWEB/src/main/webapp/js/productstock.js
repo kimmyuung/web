@@ -32,13 +32,13 @@ $("#categorybox").change( function(){
 function stockadd() {
 	let pno = $("#productbox").val(); // 제품 번호
 	let ssize = $("#ssize").val(); // 제품 번호
-	let saomount = $("#saomount").val(); // 제품 번호
+	let samount = $("#samount").val(); // 제품 번호
 	let scolor = $("#scolor").val(); // 제품 번호
 	
 	$.ajax({
 		url : "stockadd",
 		data : {"pno" : pno, "scolor" : scolor, 
-		"ssize" : ssize, "saomount" : saomount },
+		"ssize" : ssize, "saomount" : samount },
 		success : function(re) {
 			if(re == 1) {
 				alert("제고 등록 성공");

@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletResponse;
 import dao.ProductDao;
 
 /**
- * Servlet implementation class categoryadd
+ * Servlet implementation class stockupdate
  */
-@WebServlet("/admin/categoryadd")
-public class categoryadd extends HttpServlet {
+@WebServlet("/admin/stockupdate")
+public class stockupdate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public categoryadd() {
+    public stockupdate() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,11 +28,13 @@ public class categoryadd extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		String cname = request.getParameter("cname");
-		boolean result = ProductDao.getproductDao().csave(cname);
-		if(result) {response.getWriter().print(1);}
-		else {response.getWriter().print(2);}
+		
+		int sno 
+		= Integer.parseInt( request.getParameter("sno") );
+		int samount 
+		= Integer.parseInt( request.getParameter("samount") );
+		ProductDao.getproductDao().stockupdate( sno , samount );
+		
 	}
 
 	/**

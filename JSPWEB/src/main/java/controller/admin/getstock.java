@@ -33,34 +33,43 @@ public class getstock extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
-		ArrayList<Stock> list = ProductDao.getproductDao().getStock();
-		response.setCharacterEncoding("UTF-8");
-		int pno = Integer.parseInt(request.getParameter("pno") );
-		String field = request.getParameter("field");
-
-		PrintWriter out = response.getWriter();
-		String html = "";
-		if(field != null && field.equals("ssize")) {
-			for( Stock temp : list ) {
-				if(temp.getPno() == pno) {
-						html +=
-						"<option value=\""+temp.getSsize()+"\">"+temp.getSsize()+"</option>";
-				}
-				}
+		int pno 
+		= Integer.parseInt(request.getParameter("pno"));
+	
+	String field =  request.getParameter("field");
+	
+	ArrayList<Stock> list =  ProductDao.getproductDao().getStock(pno);
+	response.setCharacterEncoding("UTF-8");
+	PrintWriter out = response.getWriter();
+	String html = "";
+	
+	// 제품리스트 페이지에서 선택된 색상과 사이즈에 해당하는 재고량 출력 구역 
+	if( field != null && field.equals("amount") ) {
+		String scolor = request.getParameter("scolor");
+		String ssize = request.getParameter("ssize");
+		for( Stock temp : list ) {
+			if( temp.getScolor().equals(scolor) && 
+					temp.getSsize().equals(ssize) ) {
+				out.print( temp.getSamount()+","+temp.getUpdatedate() );
+									//  재고량 , 수정날짜
+			}
 		}
-		else {
+	}else { // 제품재고 페이지에서 사용되는 제품별 재고정보 출력 구역 
 		for( Stock temp : list ) {
 			html += 
 				"<tr>" +
-					"<td> "+temp.getScolor()+" <td>" +
-					"<td> "+temp.getSsize()+" <td>" +
-					"<td> "+temp.getSamount()+" <td>" +
-					"<td> 비고 <td>" +
+					"<td> "+temp.getScolor()+" </td>" +
+					"<td> "+temp.getSsize()+" </td>" +
+					"<td> "+temp.getSamount()+" </td>" +
+					"<td>"
+					+ "<button onclick=\'showupdate("+temp.getSno()+")\'>수정</button>"
+					+ "<button>삭제</button>"
+					+ "</td>" +
 				"</tr>";
 		}
-		}
 		out.print(html);
+	}
+		
 	}
 
 	/**

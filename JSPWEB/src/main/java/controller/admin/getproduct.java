@@ -17,13 +17,13 @@ import dto.Product;
  * Servlet implementation class gerproduct
  */
 @WebServlet("/admin/getproduct")
-public class gerproduct extends HttpServlet {
+public class getproduct extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public gerproduct() {
+    public getproduct() {
         super();
         // TODO Auto-generated constructor stub
     }

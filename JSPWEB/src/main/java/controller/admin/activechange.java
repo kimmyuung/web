@@ -30,10 +30,8 @@ public class activechange extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int active = Integer.parseInt(request.getParameter("active"));
-		
-		int pno = Integer.parseInt(request.getParameter("active"));
-		boolean result 
-		= ProductDao.getproductDao().activechange(pno, active);
+		int pno = Integer.parseInt(request.getParameter("pno"));
+		boolean result = ProductDao.getproductDao().activechange(pno, active);
 		if(result) {response.getWriter().print(1);}
 		else {response.getWriter().print(2);}
 	}
