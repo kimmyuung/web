@@ -87,7 +87,7 @@ public class ProductDao extends Dao{
 		// 4. 제품 수정 
 		// 4-2 제품 상태 변경
 		public boolean activechange(int pno, int active) {
-			String sql = "update product set active = ? where pno = ?";
+			String sql = "update product set pactive = ? where pno = ?";
 			try {
 				ps = con.prepareStatement(sql);
 				ps.setInt(1, active);
@@ -100,9 +100,36 @@ public class ProductDao extends Dao{
 		// 5. 제품 삭제 
 	///////////////////////////////////  재고 ////////////////////////////////	
 		// 1. 제품의 재고 등록 
-		public boolean ssvae() { return false; }
+		public boolean ssave(Stock stock) { 
+			try {
+				String sql = "insert into stock(scolor, ssize, samount, pno) values(?,?,?,?)";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, stock.getScolor());
+				ps.setString(2, stock.getSsize());
+				ps.setInt(3, stock.getSamount());
+				ps.setInt(4, stock.getPno());
+				ps.executeUpdate();
+				return true;
+			}catch(Exception e) {e.printStackTrace();}
+			return false; }
 		// 2. 제품의 재고 호출 
-		public Stock getStock() { return null; }
+		public ArrayList<Stock> getStock() { 
+			ArrayList<Stock> stocks = new ArrayList<Stock>();
+			String sql = "select * from stock";
+			try {
+				ps = con.prepareStatement(sql);
+				rs = ps.executeQuery();
+				while (rs.next()) {
+					Stock stock = new Stock( 
+							rs.getInt(1), rs.getString(2),
+							rs.getString(3), rs.getInt(4),
+							rs.getString(5), rs.getString(6),
+							rs.getInt(7));
+					stocks.add(stock);
+				} return stocks;
+			}catch(Exception e ) {e.printStackTrace();} 
+			return null;
+			}
 		// 3. 제품의 재고 수정 
 		// 4. 제품의 재고 삭제
 	//////////////////////////////////////////////////////////////////////////

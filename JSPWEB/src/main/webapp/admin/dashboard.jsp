@@ -20,7 +20,7 @@
 <li><h6>EZEN SHOP<br> 관리자 모드</h6></li>
 <li><button onclick="pagechange('productlist')">제품 목록</button></li>
 <li><button onclick="pagechange('productadd')">제품 등록</button> </li>
-<li><button onclick="#">제품 재고</button> </li>
+<li><button onclick="pagechange('productstock')">제품 재고</button> </li>
 <li><button onclick="#">주문 현황</button> </li>
 <li><button onclick="#">주문 배송</button> </li>
 <li><button onclick="#">매출 관리</button> </li>
@@ -45,7 +45,6 @@
 	<!-- 사용자정의 js -->
 	<script src="/JSPWEB/js/dashboard.js" type="text/javascript"></script>
 	<script src="/JSPWEB/js/main.js" type="text/javascript"></script>
-	
 	
 
 </body>

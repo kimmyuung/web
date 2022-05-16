@@ -26,8 +26,8 @@
 			<th>판매금액</th>
 			<th width="100px;">제품상태</th>
 			<th width="150px;">카테고리</th>
-			<th width="100px;">색상</th>
 			<th width="100px;">사이즈</th>
+			<th width="100px;">색상</th>
 			<th width="100px;">재고수량</th>
 			<th width="100px;">수정일</th>
 			<th width="100px;">비고(버튼)</th>
@@ -40,7 +40,7 @@
 				String cname = ProductDao.getproductDao().getcname(t.getCno());
 		%>
 		<tr>
-			<th width="5%"><%=t.getPno()%></th>
+			<th id="th<%=t.getPno() %>" width="5%"><%=t.getPno()%></th>
 			<th width="150px;"><img width="100%" src="/JSPWEB/admin/productimg/<%=t.getPimg()%>"></th>
 			<th width="150px;"><%=t.getPname()%></th>
 			<th width="150px;"><%=t.getPprice()%>원</th>
@@ -56,15 +56,15 @@
 			} %>
 			<th width="150px;"><%=active%></th>
 
-			<th width="150px;"><%=cname %></th>
-			<th width="150px;">색상</th>
-			<th width="150px;">사이즈</th>
-			<th width="150px;">재고수량</th>
+			<th width="150px;"><%= %></th>
+			<th width="150px;"><select id="sizebox(<%=t.getPno()%>)"></select> </th>
+			<th width="150px;"><select id="color(<%=t.getPno()%>)"></select> </th>
+			<th width="150px;"><select id="amount(<%=t.getPno()%>)"></select></th>
 			<th width="150px;">수정일</th>
 			<th width="150px;">
 			<button  >제품 삭제</button>
 			<button  >제품 수정</button>
-			<button onclick="pnomove(<%=t.getPno() %>)" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">상태 변경</button>
+			<button onclick="pnomove(<%=t.getPno() %>)" data-bs-toggle="modal" data-bs-target="#activemodal">상태 변경</button> 
 			<button onclick="#" >재고 변경</button>
 			</th>
 		</tr>

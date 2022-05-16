@@ -7,8 +7,9 @@ private String ssize;
 private int samount;
 private String firstdate;
 private String updatedate;
+private int pno;
 public Stock() {}
-public Stock(int sno, String scolor, String ssize, int samount, String firstdate, String updatedate) {
+public Stock(int sno, String scolor, String ssize, int samount, String firstdate, String updatedate, int pno) {
 	super();
 	this.sno = sno;
 	this.scolor = scolor;
@@ -16,6 +17,7 @@ public Stock(int sno, String scolor, String ssize, int samount, String firstdate
 	this.samount = samount;
 	this.firstdate = firstdate;
 	this.updatedate = updatedate;
+	this.pno = pno;
 }
 public int getSno() {
 	return sno;
@@ -52,6 +54,13 @@ public String getUpdatedate() {
 }
 public void setUpdatedate(String updatedate) {
 	this.updatedate = updatedate;
+}
+
+public int getPno() {
+	return pno;
+}
+public void setPno(int pno) {
+	this.pno = pno;
 }
 @Override
 public String toString() {
