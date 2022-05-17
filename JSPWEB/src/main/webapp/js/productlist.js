@@ -57,11 +57,11 @@ function getstock( pno ){
 }
 /******  선택한 제품의 재고 변경 입력창 열기   ******** */
 function showupdate( sno ){
-	
 	$("#updatebox").css("display","block"); // 재고수량 수정 입력창 열기 
 	$("#sno").val(sno); // 수정할 재고번호 넣어주기 
 }
 /******  선택한 제품의 재고 변경처리 하기  ******** */
+
 function stockupdate( ){
 	let sno = $("#sno").val();
 	let samount = $("#samount").val();
