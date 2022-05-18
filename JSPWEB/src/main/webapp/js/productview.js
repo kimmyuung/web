@@ -53,12 +53,14 @@ $("#size_select").change(function() {
 	let pprice = $("#price").val();
 	let check = color + size; // 옵션 : 식별용
 	let 객체 = {
-		pname : pname,
-		color : color,
-		size : size,
-		amount : amount,
-		pprice : pprice,
-		check : check
+		pname : pname , 	// 필드명(속성명) : 데이터 
+		color : color ,  
+		size : size , 
+		amount : amount , 
+		pprice : pprice ,
+		totalprice :  pprice * amount  ,
+		point :  ( pprice * amount ) * 0.01 ,
+		check : check 
 	}
 	for(let i = 0; i < select.length; i++) {
 		if(select[i].check == check) {
@@ -76,29 +78,153 @@ $("#size_select").change(function() {
 function selectoption () {
 	html2 = '<tr><td width="60%">상품명</td><td width="15%">상품수</td><td width="25%">가격</td></tr>';
 	for(let i = 0; i < select.length; i++) {
+		// 총금액 및 포인트 금액 최신화
+		select[i].totalprice =  select[i].pprice *  select[i].amount ;
+		select[i].point =  select[i].totalprice * 0.01 ;
 		html2 += 
 		'<tr>' +
 			'<td>'+select[i].pname+'('+select[i].color+')/'+select[i].size+'</td>'+
 			'<td>' +
 			'<div class="row g-0">' +
 			'<div class="col-md-7">' +	
-			'<input id="amount" type="text" value="1" class="form-control amount_input">' +
-			'<button class="amount_btn" onclick="aplus()">▲</button>' +		
-			'<button class="amount_btn" onclick="aminus()">▼</button>'	+	
+			'<input id="amount'+i+'" type="text" value="'+select[i].amount+'" class="form-control amount_input">' +
+			// 수량입력상자 : readonly : 수정 불가
+			'<button readonly class="amount_btn" onclick="aplus('+i+')">▲</button>' +		
+			'<button readonly class="amount_btn" onclick="aminus('+i+')">▼</button>'	+	
 			'</div><br>' +	
 			'<div class="col-md-1">' +		
 			'<button class="cancel_btn" type="button" onclick="pdelete('+i+')" >x</button>' +		
 			'</div></div> </td>' +		
-			'<td style="font-size: 10px;" onkeyup="commaCheck(this)">' + 
-			(select[i].amount*select[i].pprice) + 
+			'<td style="font-size: 10px;">' + 
+			select[i].totalprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+'원' + 
 			'<br>'+ 
-			(select[i].amount*select[i].pprice) * 0.01 +
+			select[i].point.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+'원' +
 			'(적)</td></tr>'
 		};
 	$("#select_table").html( html2 );
+	let total_price = 0;
+	let total_amount = 0;
+	for(let i = 0; i < select.length; i++) {
+	total_price += select[i].pprice;
+	total_amount += select[i].amount;
+	}
+	$("#total_price").html( total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+'원 ('+ total_amount +'개)' );
 }
 
 function pdelete(i) {
 	select.splice(i, 1); // i번째 인덱스부터 1개의 인덱스 삭제
 	selectoption();
+}
+
+
+function aplus(i) {
+	let pno = $("#pno").val();
+	
+	$.ajax({
+		url : "getamount",
+		data : {'pno' : pno, 'color' : select[i].color, 
+		'size' : select[i].size},
+		success : function(re){
+			if(select[i].amount >= re) {
+				alert("재고가 부족합니다."); return;			
+				}
+			
+				select[i].amount++;	
+				selectoption();
+			
+		}
+	});
+	
+	
+	
+}
+
+function aminus(i) {
+	if(select[i].amount == 1) { 
+		alert("최소 수량은 1개 입니다.");
+		return;
+	}
+	
+	select[i].amount--;
+	selectoption();
+}
+
+// 천단위 구분 쉼표 -> 정규표현식(언어)
+// /^ : 정규표현식 시작 -> 패턴 : (앞=문자 존재), (뒤 = 문자열 3글자)
+// /d : 0-9(정수) 
+// (/d{3}) => 정수 3자리
+// {} : 길이
+// + : 앞 표현식 반복되는 부분 대응
+// x(?!y) : x 뒤에 y가 없는 경우
+// (?!/d) : 앞에 패턴이 없는 경우 = 뒤에 숫자가 없는 경우 
+// x(?=y) : x 뒤에 y가 있는 경우 
+// /B : 문자 경계선 (문자제외) /B(?= (/d{3})+(?!/d) )
+// (?!/d) : 앞에 패턴이 없는 경우 (뒤에 숫자가 없는 경우)
+// (/d{3})+(/d{3})
+// /d{3} : 정수 3자리 패턴
+// (/d{3})+ : 앞 표현식 반복 대응
+// (/d{3})+ (?!/d) : 표현식 뒤에 정수가 없는 경우 [ 정수 끝 찾기 ]
+// /B(?=Y) : 문자가 없으면 Y를 실행
+// /g : 전역검색 [모든 곳 검색]
+// /i : 대소문자 구분 없는 검색
+
+// js (내장메소드 : toLocalString() )
+// (/\B(?=(\d{3})+(?!\d))/g, ',') 정규표현식
+// 데이터.toLocalString(undefinde, {maximumFractionDigits : 소수점 표시 단위})  
+
+let comn = "/\B(?= (\d{3})+ (?!\d) )/g"; // 천단위 구분쉼표 정규표현식 변수
+	// 데이터.toString().replace('정규표현식', ',');
+
+
+// 관심제품 추가
+function saveplike(mid) {
+	if(mid == null) {alert('로그인후 등록이 가능합니다.'); return;}
+	let pno = $("#pno").val();
+	
+	$.ajax({
+		url : "saveplike",
+		data : {"pno" : pno, "mid" : mid},
+		success : function(re) {
+			if(re==1) {alert("관심 취소했습니다.");
+				
+			}
+			else if(re==2) {
+				alert("관심 등록했습니다.");
+			}
+			else if(re == 3) {
+				alert("관심 상품 관련 오류 발생]] 관리자에게 문의")
+			}
+			else {
+				alert("관리자에게 문의")
+			}
+			$("#btnbox").load(location.href+ " #btnbox");
+		}
+	});	
+}
+
+function shopadd(mid) {
+	if(mid == null) {
+		alert('로그인 후 장바구니 등록이 가능합니다.'); 
+		return;}
+	let pno = $("#pno").val();
+	$.ajax({
+		url : "shopadd",
+		data : {"pno" : pno, "mid" : mid},
+		success : function(re) {
+			if(re==1) {alert("장바구니에 대한 등록을 취소했습니다.");
+				
+			}
+			else if(re==2) {
+				alert("장바구니 등록했습니다.");
+			}
+			else if(re == 3) {
+				alert("장바구니 등록 관련 오류 발생]] 관리자에게 문의")
+			}
+			else {
+				alert("관리자에게 문의")
+			}
+			$("#btnbox").load(location.href+ " #btnbox");
+		}
+	});	
+	
 }

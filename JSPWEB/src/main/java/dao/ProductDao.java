@@ -171,6 +171,83 @@ public class ProductDao extends Dao{
 			return null;
 		}
 		
+		////////// 관심상품 등록 및 취소
+		public int saveplike(int pno, int mno) {
+			String sql = "select plikeno from plike where pno =? and mno = ?";
+			try {
+				ps = con.prepareStatement(sql);
+				ps.setInt(1, pno);
+				ps.setInt(2, mno);
+				rs = ps.executeQuery();
+				
+				if(rs.next()) {
+					sql = "delete from plike where plikeno ="+rs.getInt(1);
+					ps = con.prepareStatement(sql);
+					ps.executeUpdate();
+					return 1;
+					}
+				else {
+					sql = "insert into plike(pno, mno)values (?,?)";
+					ps = con.prepareStatement(sql);
+					ps.setInt(1, pno);
+					ps.setInt(2, mno);
+					ps.executeUpdate();
+					return 2;
+				}
+				
+			} catch(Exception e) {e.printStackTrace();}
+			
+			return 3;
+		}
+		public boolean getplike(int pno, int mno) {
+			String sql = "select * from plike where pno =? and mno = ?";
+			try {
+				ps = con.prepareStatement(sql);
+				ps.setInt(1, pno);
+				ps.setInt(2, mno);
+				rs = ps.executeQuery();
+				if(rs.next()) return true;
+			}catch(Exception e) {e.printStackTrace();}
+			return false;
+		}
 		
-		
+		//////////장바구니 등록 및 취소
+		public int shopadd(int pno, int mno) {
+			String sql = "select shopno from shop where pno =? and mno = ?";
+			try {
+				ps = con.prepareStatement(sql);
+				ps.setInt(1, pno);
+				ps.setInt(2, mno);
+				rs = ps.executeQuery();
+				
+				if(rs.next()) {
+					sql = "delete from shop where shopno ="+rs.getInt(1);
+					ps = con.prepareStatement(sql);
+					ps.executeUpdate();
+					return 1;
+					}
+				else {
+					sql = "insert into shop(pno, mno)values (?,?)";
+					ps = con.prepareStatement(sql);
+					ps.setInt(1, pno);
+					ps.setInt(2, mno);
+					ps.executeUpdate();
+					return 2;
+				}
+				
+			} catch(Exception e) {e.printStackTrace();}
+			
+			return 3;
+		}
+		public boolean getshop(int pno, int mno) {
+			String sql = "select * from shop where pno =? and mno = ?";
+			try {
+				ps = con.prepareStatement(sql);
+				ps.setInt(1, pno);
+				ps.setInt(2, mno);
+				rs = ps.executeQuery();
+				if(rs.next()) return true;
+			}catch(Exception e) {e.printStackTrace();}
+			return false;
+		}
 }

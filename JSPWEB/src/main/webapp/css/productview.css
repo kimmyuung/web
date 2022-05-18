@@ -36,12 +36,11 @@ img{
 .total_price{
 	text-align: right;
 }
-
 .btn1{
-	background-color: black;
-	color: white;
+	background-color: white;
+	color: black;
+	
 }
-
 .price_rat{
 	color: red;
 	font-size: 20px;
@@ -52,4 +51,12 @@ img{
 	text-decoration: line-through;
 	padding-right: 15px;
 	color: #999999;
+}
+
+.btnbox btn{
+	background-color: black;
+	color: white;
+	border: 1px solid #999999;
+	padding: 20px 10px;
+	margin-right: 8px;
 }

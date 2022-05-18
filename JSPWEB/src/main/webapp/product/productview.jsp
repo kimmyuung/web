@@ -1,3 +1,4 @@
+<%@page import="dao.MemberDao"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.Set"%>
 <%@page import="java.util.TreeSet"%>
@@ -21,7 +22,7 @@
 	<br><br><br>
 	<%
 	int pno = Integer.parseInt(request.getParameter("pno"));
-	
+	String mid = (String)session.getAttribute("login");
 	Product p = ProductDao.getproductDao().getproduct(pno);
 	ArrayList<Stock> slist = ProductDao.getproductDao().getStock(pno);
 	Set<String> sizelist = new TreeSet<>();
@@ -138,19 +139,36 @@
 				<br>
 				<div class="row">
 					<div class="col-md-6">총 상품금액</div>
-					<div class="col-md-6 total_price"><%=df.format( price )%></div>
+					<div id="total_price" class="col-md-6 total_price"></div>
 				</div>
 				<br>
-				<div class="row">
-					<div class="col-md-4">
-						<button class="form-control p-4 btn1">바로 구매하기</button>
-					</div>
-					<div class="col-md-4">
-						<button class="form-control p-4 btn1">장바구니 담기</button>
-					</div>
-					<div class="col-md-4">
-						<button class="form-control p-4 btn1">관심상품 등록</button>
-					</div>
+				<div class="row" id="btnbox">
+					
+						<button id="btn1" class=" p-4">바로 구매하기</button>
+					
+					<% 
+					int mno = MemberDao.getmemberDao().getmno(mid);
+					if(mid !=null && ProductDao.getproductDao().getshop(pno, mno)) { 	%>
+						<button id="btn2" class=" p-4" onclick="shopadd('<%=mid%>')">장바구니 취소</button>
+						
+					<%}else{ %>
+						
+						<button id="btn2" class=" p-4" onclick="shopadd('<%=mid%>')">장바구니 담기</button>
+						
+					<%} %>
+				
+					<%
+					
+					if(mid !=null && ProductDao.getproductDao().getplike(pno, mno)) { 	%>
+						
+						<button id="btn3" class=" p-4" onclick="saveplike('<%=mid%>')">관심상품 취소</button>
+						
+					<%}else{ %>
+						
+						<button id="btn3" class=" p-4" onclick="saveplike('<%=mid%>')">관심상품 등록</button>
+						
+					<%} %>
+					
 				</div>
 			</div>
 		</div>
