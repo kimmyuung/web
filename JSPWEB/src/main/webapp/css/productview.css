@@ -19,8 +19,9 @@ img{
 	font-size: 5px;
 }
 .amount_input {
-	padding: 10px;
-	vertical-align: middle;
+	padding: 0px;
+	margin: 0px;
+	width: 20px;
 }
 .amount_btn{
 	display: block;

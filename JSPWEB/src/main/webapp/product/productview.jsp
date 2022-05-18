@@ -27,8 +27,9 @@
 	ArrayList<Stock> slist = ProductDao.getproductDao().getStock(pno);
 	Set<String> sizelist = new TreeSet<>();
 	Set<String> colorlist = new TreeSet<>();
-	DecimalFormat df = new DecimalFormat("###,### 원");
-	Float price = p.getPprice() - ( p.getPprice()*p.getPdiscount() ) ; 
+	DecimalFormat df = new DecimalFormat("###,###원"); // 천단위 구분 쉼표
+	Float price = p.getPprice() - ( p.getPprice()*p.getPdiscount() ) ; 	// 할인된금액 계산 
+	Float point = price * 0.01f ; // java 기본타입 : 정수형=int 실수=double	// 포인금액 계산 
 	for(Stock s : slist) {
 		sizelist.add(s.getSsize());
 	}
@@ -156,12 +157,12 @@
 						<button id="btn2" class=" p-4" onclick="shopadd('<%=mid%>')">장바구니 담기</button>
 						
 					<%} %>
-				
+						
 					<%
 					
 					if(mid !=null && ProductDao.getproductDao().getplike(pno, mno)) { 	%>
 						
-						<button id="btn3" class=" p-4" onclick="saveplike('<%=mid%>')">관심상품 취소</button>
+						<br><button id="btn3" class=" p-4" onclick="saveplike('<%=mid%>')">관심상품 취소</button>
 						
 					<%}else{ %>
 						
