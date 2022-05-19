@@ -2,6 +2,10 @@ package dao;
 
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import dto.Cart;
 import dto.Category;
 import dto.Product;
 import dto.Stock;
@@ -211,43 +215,64 @@ public class ProductDao extends Dao{
 			return false;
 		}
 		
-		//////////장바구니 등록 및 취소
-		public int shopadd(int pno, int mno) {
-			String sql = "select shopno from shop where pno =? and mno = ?";
-			try {
-				ps = con.prepareStatement(sql);
-				ps.setInt(1, pno);
-				ps.setInt(2, mno);
-				rs = ps.executeQuery();
-				
-				if(rs.next()) {
-					sql = "delete from shop where shopno ="+rs.getInt(1);
-					ps = con.prepareStatement(sql);
-					ps.executeUpdate();
-					return 1;
-					}
-				else {
-					sql = "insert into shop(pno, mno)values (?,?)";
-					ps = con.prepareStatement(sql);
-					ps.setInt(1, pno);
-					ps.setInt(2, mno);
-					ps.executeUpdate();
-					return 2;
-				}
-				
-			} catch(Exception e) {e.printStackTrace();}
+		//////////////////////////////// 장바구니/////////////////////////
+		public boolean savecart(Cart cart) {
+			String sql = "select cartno from cart where sno = "+cart.getSno()+" and mno = "+cart.getMno();
+
 			
-			return 3;
-		}
-		public boolean getshop(int pno, int mno) {
-			String sql = "select * from shop where pno =? and mno = ?";
 			try {
 				ps = con.prepareStatement(sql);
-				ps.setInt(1, pno);
-				ps.setInt(2, mno);
 				rs = ps.executeQuery();
-				if(rs.next()) return true;
+				if(rs.next()) { // 1. 장바구니내 동일한 제품 존재시 수량 업데이트 처리
+					sql = "update cart set totalamount = totalamount + ? where cartno = ?";
+					ps = con.prepareStatement(sql);
+					ps.setInt(1, cart.getTotal_amount());
+					ps.setInt(2, rs.getInt(1));
+					ps.executeUpdate();
+					return true;
+				}
+				else {
+					sql = "insert into cart(totalamount, totalprice, sno, mno) values(?,?,?,?)";
+					ps = con.prepareStatement(sql);
+					ps.setInt(1, cart.getTotal_amount());
+					ps.setInt(2, cart.getTotal_price());
+					ps.setInt(3, cart.getSno());
+					ps.setInt(4, cart.getMno());
+					ps.executeUpdate();
+					return true;
+				}
+				// 2. 존재하지 않으면 등록
 			}catch(Exception e) {e.printStackTrace();}
 			return false;
 		}
+		//
+		public JSONArray getcart(int mno) {
+			JSONArray jsonArray = new JSONArray();
+			String sql = "select"
+					+ "A.cartno as 장바구니번호, "
+					+ "A.totalamount as 구매수량," 
+					+ "A.totalprice as 총가격,"
+					+ "B.scolor as 색상,"
+					+ "B.ssize as 사이즈,"
+					+ "B.pno as  제품번호"
+					+ "from cart A"
+					+ "join stock B"
+					+ "on A.sno = B.sno"
+					+ "where mno = " + mno;
+			try {
+				ps = con.prepareStatement(sql);
+				rs = ps.executeQuery();
+				while(rs.next()) {
+					// 결과내 하나씩 모든 레코드를 -> 하나씩 json 객체로 변환
+					JSONObject object = new JSONObject();
+					// 하나씩 json 객체를 json 배열에 담기
+					jsonArray.put(object);
+				}
+				System.out.println(jsonArray.toString());
+				return jsonArray;
+			}catch(Exception e) {e.printStackTrace();}
+			return null;
+		}	
+		
+		
 }

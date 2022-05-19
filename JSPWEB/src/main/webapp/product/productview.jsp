@@ -147,19 +147,14 @@
 					
 						<button id="btn1" class=" p-4">바로 구매하기</button>
 					
-					<% 
-					int mno = MemberDao.getmemberDao().getmno(mid);
-					if(mid !=null && ProductDao.getproductDao().getshop(pno, mno)) { 	%>
-						<button id="btn2" class=" p-4" onclick="shopadd('<%=mid%>')">장바구니 취소</button>
-						
-					<%}else{ %>
-						
 						<button id="btn2" class=" p-4" onclick="shopadd('<%=mid%>')">장바구니 담기</button>
 						
-					<%} %>
-						
-					<%
 					
+						
+					
+					
+					<% 
+							int mno = MemberDao.getmemberDao().getmno(mid);
 					if(mid !=null && ProductDao.getproductDao().getplike(pno, mno)) { 	%>
 						
 						<br><button id="btn3" class=" p-4" onclick="saveplike('<%=mid%>')">관심상품 취소</button>

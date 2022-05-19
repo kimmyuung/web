@@ -113,8 +113,8 @@ function selectoption () {
 	let total_amount = 0;
 	
 	for(let i = 0; i < select.length; i++) {
-	total_price = select[i].pprice * select[i].amount;
-	total_amount = select[i].amount;
+	total_price += select[i].totalprice;
+	total_amount += select[i].amount;
 	}
 	$("#total_price").html(  total_price.toLocaleString()+'원 ('+ total_amount +'개)' );
 }
@@ -232,24 +232,15 @@ function shopadd(mid) {
 	
 	$.ajax({
 		url : "shopadd",
-		data : {'json' : JSON.stringify(select)},
+		data : {'json' : JSON.stringify(select), 'pno' : $("#pno").val()},
 		//data : {"pno" : pno, "mid" : mid},
 		// JSON.stringify() : 배열이나 객체를 JSON 형태로 보냄
 		// key : value, name
 		
 		success : function(re) {
-			if(re==1) {alert("장바구니에 대한 등록을 취소했습니다.");
-				
-			}
-			else if(re==2) {
-				alert("장바구니 등록했습니다.");
-			}
-			else if(re == 3) {
-				alert("장바구니 등록 관련 오류 발생]] 관리자에게 문의")
-			}
-			else {
-				alert("관리자에게 문의")
-			}
+			if(re == -1) { alert("장바구니에 등록했습니다.");}
+			else {alert("관리자에게 문의" +(re+1) +" 옵션");}
+			
 			$("#btnbox").load(location.href+ " #btnbox");
 		}
 	});	
