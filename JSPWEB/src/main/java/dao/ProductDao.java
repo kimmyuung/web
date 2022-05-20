@@ -224,7 +224,7 @@ public class ProductDao extends Dao{
 				ps = con.prepareStatement(sql);
 				rs = ps.executeQuery();
 				if(rs.next()) { // 1. 장바구니내 동일한 제품 존재시 수량 업데이트 처리
-					sql = "update cart set totalamount = totalamount + ? where cartno = ?";
+					sql = "update cart set totalamount = ? where cartno = ?";
 					ps = con.prepareStatement(sql);
 					ps.setInt(1, cart.getTotal_amount());
 					ps.setInt(2, rs.getInt(1));
@@ -248,27 +248,38 @@ public class ProductDao extends Dao{
 		//
 		public JSONArray getcart(int mno) {
 			JSONArray jsonArray = new JSONArray();
-			String sql = "select"
-					+ "A.cartno as 장바구니번호, "
-					+ "A.totalamount as 구매수량," 
-					+ "A.totalprice as 총가격,"
-					+ "B.scolor as 색상,"
-					+ "B.ssize as 사이즈,"
-					+ "B.pno as  제품번호"
-					+ "from cart A"
-					+ "join stock B"
-					+ "on A.sno = B.sno"
-					+ "where mno = " + mno;
+			String sql = "select "
+					+ "	A.cartno as 장바구니번호 , "
+					+ "    A.totalamount as 구매수량 , "
+					+ "    A.totalprice as 총가격 , "
+					+ "    B.scolor as 색상 ,  "
+					+ "    B.ssize as 사이즈 , "
+					+ "    B.pno as 제품번호 ,	 "
+					+ "    C.pname as 제품명 , "
+					+ "    C.pimg as 제품이미지 "
+					+ "from cart A "
+					+ "join stock B "
+					+ "on A.sno = B.sno "
+					+ "join product C "
+					+ "on B.pno = C.pno "
+					+ "where A.mno ="+mno;
 			try {
 				ps = con.prepareStatement(sql);
 				rs = ps.executeQuery();
 				while(rs.next()) {
 					// 결과내 하나씩 모든 레코드를 -> 하나씩 json 객체로 변환
 					JSONObject object = new JSONObject();
-					// 하나씩 json 객체를 json 배열에 담기
+					object.put("cartno", rs.getInt(1));
+					object.put("totalamount", rs.getInt(2) );
+					object.put("totalprice", rs.getInt(3) );
+					object.put("scolor", rs.getString(4) );
+					object.put("ssize", rs.getString(5)) ;
+					object.put("pno", rs.getInt(6) );
+					object.put("pname", rs.getString(7));
+					object.put("pimg", rs.getString(8));
 					jsonArray.put(object);
 				}
-				System.out.println(jsonArray.toString());
+				
 				return jsonArray;
 			}catch(Exception e) {e.printStackTrace();}
 			return null;
