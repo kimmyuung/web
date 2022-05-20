@@ -285,5 +285,27 @@ public class ProductDao extends Dao{
 			return null;
 		}	
 		
+		public boolean updatecart(int cartno, int samount, int totalpirce) {
+			try {
+				String sql = "update cart set totalamount = ?, totalprice = ? where cartno = ?"; 
+				ps = con.prepareStatement(sql);
+				ps.setInt(1, samount);
+				ps.setInt(2, totalpirce);
+				ps.setInt(3, cartno);
+				ps.executeUpdate();
+				return true;
+			}catch(Exception e) {e.printStackTrace();}
+			return false;
+		}
+		public boolean deletecart(int cartno) {
+			String sql = "delete from cart where cartno = ?";
+			try {
+				ps = con.prepareStatement(sql);
+				ps.setInt(1, cartno);
+				ps.executeUpdate();
+				return true;
+			}catch(Exception e) {e.printStackTrace();}
+			return false;
+		}
 		
 }
