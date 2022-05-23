@@ -1,12 +1,15 @@
 package dao;
 
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+
 import dto.Cart;
 import dto.Category;
+import dto.Order;
 import dto.Product;
 import dto.Stock;
 
@@ -307,5 +310,36 @@ public class ProductDao extends Dao{
 			}catch(Exception e) {e.printStackTrace();}
 			return false;
 		}
-		
+		///////////////////////////////// 주문 ///////////////////////////////
+		public boolean ordersave(Order order) {
+			String sql = "insert into porder(ordername, orderphone, orderaddress, ordertotalpay, orderrequest, mno)"
+					+ "values(?,?,?,?,?,?)";
+			try {									// insert 후에 자동 생성한 pk 값 
+				ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			ps.setString(1, order.getOrdername());
+			ps.setString(2, order.getOrderphone());
+			ps.setString(3, order.getOrderaddress());
+			ps.setInt(4, order.getOrdertotalpay());
+			ps.setString(5, order.getOrderrequest());
+			ps.setInt(6, order.getMno());
+			ps.executeUpdate();
+			rs = ps.getGeneratedKeys();
+			if(rs.next()) {
+				// cart -> porderdetail
+				int pk = rs.getInt(1);
+				sql = "insert into porderdetail (samount, totalprcie, orderno, sno)" + 
+						"select samount , totalprice, " +pk+ " , sno from cart where mno = " + order.getMno();
+				ps = con.prepareStatement(sql);
+				ps.executeUpdate();
+				
+				// cart -> delete
+				sql = "delete from cart where mno = " + order.getMno();
+				ps = con.prepareStatement(sql);
+				ps.executeUpdate();
+				
+				return true;
+			}
+			}catch(Exception e) {e.printStackTrace();}
+			return false;
+		}
 }

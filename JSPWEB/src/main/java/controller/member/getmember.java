@@ -1,4 +1,4 @@
-package controller.product;
+package controller.member;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -10,20 +10,16 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 
 import dao.MemberDao;
-import dao.ProductDao;
-import dto.Order;
+import dto.Member;
 
 /**
- * Servlet implementation class saveorder
+ * Servlet implementation class getmember
  */
-@WebServlet("/product/saveorder")
-public class saveorder extends HttpServlet {
+@WebServlet("/member/getmember")
+public class getmember extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public saveorder() {
+	
+    public getmember() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,24 +28,25 @@ public class saveorder extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String mid = (String) request.getSession().getAttribute("login");
-		int mno = MemberDao.getmemberDao().getmno(mid);
+		// TODO Auto-generated method stub
+		String mid = (String)request.getSession().getAttribute("login");
 		
-		String json = request.getParameter("orderjson");
+		Member member = MemberDao.getmemberDao().getmember(mid);
 		try {
-		JSONObject jo = new JSONObject(json); // json 객체형 변환
-		String ordername= jo.getString("ordername");
-		String orderphone = jo.get("orderphone").toString();
-		String orderaddress = jo.get("orderaddress").toString();
-		int totalpay = jo.getInt("ordertotalpay");
-		String orderrequest = jo.get("orderrequest").toString();
+		JSONObject object = new JSONObject();
 		
-		Order order = new Order(0, null, ordername, orderphone, orderaddress, totalpay, 0, orderrequest, 0, mno);
-
-		// 주문 db처리
-		boolean result = ProductDao.getproductDao().ordersave(order);
+		object.put("mno", member.getMno());
+		object.put("mid", member.getMid());
+		object.put("mname", member.getMname());
+		object.put("mphone", member.getMphone());
+		object.put("memail", member.getMemail());
+		object.put("maddress", member.getMaddress());
+		object.put("mpoint", member.getMpoint());
+		object.put("mdate", member.getMdate());
 		
-		response.getWriter().print(result);
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json");
+		response.getWriter().print(object);
 		}catch(Exception e) {e.printStackTrace();}
 	}
 

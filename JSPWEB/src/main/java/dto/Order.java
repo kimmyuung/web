@@ -10,10 +10,11 @@ private int ordertotalpay;
 private int orderactive;
 private String orderrequest;
 private int orderdeliverno;
+private int mno;
 
 public Order() {}
 public Order(int orderno, String orderdate, String ordername, String orderphone, String orderaddress, int ordertotalpay,
-		int orderactive, String orderrequest, int orderdeliverno) {
+		int orderactive, String orderrequest, int orderdeliverno, int mno) {
 	super();
 	this.orderno = orderno;
 	this.orderdate = orderdate;
@@ -24,6 +25,7 @@ public Order(int orderno, String orderdate, String ordername, String orderphone,
 	this.orderactive = orderactive;
 	this.orderrequest = orderrequest;
 	this.orderdeliverno = orderdeliverno;
+	this.mno = mno;
 }
 public int getOrderno() {
 	return orderno;
@@ -79,12 +81,21 @@ public int getOrderdeliverno() {
 public void setOrderdeliverno(int orderdeliverno) {
 	this.orderdeliverno = orderdeliverno;
 }
+public int getMno() {
+	return mno;
+}
+public void setMno(int mno) {
+	this.mno = mno;
+}
 @Override
 public String toString() {
 	return "Order [orderno=" + orderno + ", orderdate=" + orderdate + ", ordername=" + ordername + ", orderphone="
 			+ orderphone + ", orderaddress=" + orderaddress + ", ordertotalpay=" + ordertotalpay + ", orderactive="
-			+ orderactive + ", orderrequest=" + orderrequest + ", orderdeliverno=" + orderdeliverno + "]";
+			+ orderactive + ", orderrequest=" + orderrequest + ", orderdeliverno=" + orderdeliverno + ", mno=" + mno
+			+ "]";
 }
+
+
 
 
 

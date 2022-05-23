@@ -92,3 +92,30 @@ select * from product join stock on product.pno = stock.pno;
         max( 필드명 ) : 최댓값
         min( 필드명 ) : 최솟값 
 /*	
+ * 
+ * create table A(
+field1 int
+);
+-- 테이블에 레코드 추가
+insert into A values(3);
+
+-- 테이블 검색
+select * from A;
+
+create table B(
+field1 int
+);
+
+-- A테이블의 데이터를 B테이블의 레코드에 추가
+
+-- 적용 : cart 테이블 ----> porderdatail
+
+-- 1. 특정 회원의 cart 찾기 : 회원번호 2번인 회원의 카트 
+select * from cart where mno = 2;
+
+-- 2. 특정 회원의 cart 찾기 -> 특정 필드만 표시
+select samount, totalprice, 1, sno from cart where mno = 2;
+
+-- 3. 검색 결과를 다른 테이블에 데이터 추가하기
+insert into porderdetail (samount, totalprcie, orderno, sno) 
+select samount , totalprice, 1, sno from cart where mno = 2;
