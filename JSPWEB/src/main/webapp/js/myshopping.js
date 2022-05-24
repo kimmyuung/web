@@ -35,28 +35,29 @@ $(window).scroll( function(){
 
 function view(){
 	
-	let html= "";
-	
-		for( let i = 0 ; i<parentlist.length ; i++ ){	// count 개수만큼 제품 수 출력
+	let html ="";
+	for( let i = 0 ; i<parentlist.length ; i++ ){	// count 개수만큼 제품 수 출력
 		if( i == viewcount ) break; // 만약에 i가 화면에 표시할 주문수와 동일하면 출력 금지 
 		html += 
 			'<div class="row"> '+
-				'<div class="col-sm-3">'+  /* 주문 정보 출력 구역 */
-					'<span> '+parentlist[i][0]["orderno"]+' </span>'+
-					'<span> '+parentlist[i][0]["orderdate"]+' </span>'+
+				'<div class="orderinfo">'+  /* 주문 정보 출력 구역 */
+					'<span> 주문번호 :'+parentlist[i][0]["orderno"]+' </span>'+
+					'<span> 주문날짜 :'+parentlist[i][0]["orderdate"]+' </span>'+
 				'</div>'+
-				'<div class="col-sm-9"> '; 
+				'<div class="col-sm-12 orderdetailbox"> '; 
 				
 		for( let j = 0 ; j<parentlist[i].length ; j++ ){ /* 주문상세 출력 구역 */ 
 			let childlist = parentlist[i];	// 상위리스트에 하나씩 하위리스트 꺼내기
 			html += 
-				'<div class="row"> '+
-						'<div class="col-sm-8">'+
-							'<span> <img width="100%" alt="" src="/JSPWEB/admin/productimg/'+childlist[i]["pimg"]+'"></span>'+
-							'<span> '+childlist[j]["pname"]+' </span>'+
-							'<span> '+childlist[j]["scolor"]+'/'+childlist[j]["ssize"]+'</span>'+
+				'<div class="row product"> '+
+						'<div class="col-sm-2">'+
+							'<span> <img width="100%" alt="" src="/JSPWEB/admin/productimg/'+childlist[j]["pimg"]+'"></span>'+
+							'</div>'+
+							'<div class="col-sm-5 offset-1">' +
+							'<div class="pnmae"> 제품이름 : '+childlist[j]["pname"]+' </div>'+
+							'<div class="poption"> 색깔 :'+childlist[j]["scolor"]+'/ 사이즈 : '+childlist[j]["ssize"]+'</div>'+
 						'</div>'+
-						'<div class="col-sm-4">'+
+						'<div class="col-sm-4 orderbtnbox">'+
 							'<button> 배송조회 </button>'+
 							'<button> 교환 , 반품 신청 , 취소 신청 </button>'+
 							'<button> 리뷰 작성하기 </button>'+
@@ -64,9 +65,10 @@ function view(){
 					'</div>';
 		}			
 			html += 
-				'</div>'+ // row와 col-sm-9 div 닫기 위해 사용
+				'</div>'+
 			'</div>';
 	}
+	$("#orderbox").html(html);
 	$("#orderbox").html(html);
 
 }
